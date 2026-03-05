@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calcule ton prix freelance | ERE AGENCY</title>
+  <meta name="description" content="Outil gratuit pour calculer ton tarif freelance en marketing digital.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <style>
+/* ================================================================
+   DESIGN SYSTEM — DA ERE AGENCY
+   #F4F4F0 · #FFFFFF · Vert #3BFF6C · Noir #0A0A0A
+================================================================ */
+:root {
+  --bg:#F4F4F0; --white:#FFFFFF; --surface-2:#EFEFEB; --surface-3:#E8E8E4;
+  --border:#E0E0DA; --border-2:#C8C8C0;
+  --green:#3BFF6C; --green-2:#20E853; --green-3:#17C944; --green-ink:#0A6E25;
+  --text:#0A0A0A; --text-2:#2E2E2E; --text-3:#5C5C5C; --text-4:#9A9A9A;
+  --font:'Plus Jakarta Sans',sans-serif;
+  --r-sm:8px; --r-md:14px; --r-lg:20px; --r-xl:28px; --r-2xl:40px; --r-full:9999px;
+  --shadow:0 2px 8px rgba(0,0,0,0.06),0 0 1px rgba(0,0,0,0.04);
+  --shadow-md:0 6px 24px rgba(0,0,0,0.08),0 2px 6px rgba(0,0,0,0.04);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:300;height:60px;background:rgba(244,244,240,.92);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 32px;justify-content:space-between}
+.nav-logo{font-size:20px;font-weight:800;letter-spacing:-.05em;color:var(--text);text-decoration:none;display:flex;align-items:flex-start;gap:1px}
+.nav-logo-dot{display:inline-block;width:7px;height:7px;background:var(--green-3);border-radius:50%;margin-top:3px;margin-left:1px}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-link{font-size:13px;font-weight:600;color:var(--text-3);text-decoration:none;padding:6px 10px;border-radius:var(--r-sm);transition:color .15s}
+.nav-link:hover{color:var(--text)}
+.nav-btn{background:var(--green);color:var(--text);font-family:var(--font);font-size:13px;font-weight:800;padding:8px 18px;border-radius:var(--r-full);border:none;cursor:pointer;text-decoration:none;letter-spacing:-.01em;transition:background .15s,transform .12s;display:inline-flex;align-items:center;gap:6px}
+.nav-btn:hover{background:var(--green-2);transform:scale(.98)}
+.nav-btn.outline{background:transparent;border:1.5px solid var(--border-2);color:var(--text-2)}
+.nav-btn.outline:hover{background:var(--surface-2);border-color:var(--text-4)}
+
+/* PAGE SYSTEM */
+.page{display:none}.page.active{display:block}
+
+/* BUTTONS */
+.btn-primary{background:var(--text);color:#fff;font-family:var(--font);font-size:14px;font-weight:800;padding:13px 26px;border-radius:var(--r-full);border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;letter-spacing:-.01em;transition:background .15s,transform .12s}
+.btn-primary:hover{background:#1c1c1c;transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--text-3);font-family:var(--font);font-size:14px;font-weight:600;padding:13px 22px;border-radius:var(--r-full);border:1.5px solid var(--border-2);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:all .15s}
+.btn-ghost:hover{border-color:var(--text-3);color:var(--text)}
+.btn-green{background:var(--green);color:var(--text);font-family:var(--font);font-size:14px;font-weight:800;padding:13px 26px;border-radius:var(--r-full);border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;letter-spacing:-.01em;transition:background .15s,transform .12s}
+.btn-green:hover{background:var(--green-2);transform:translateY(-1px)}
+.btn-green.sm{font-size:13px;padding:10px 20px}
+
+/* LANDING */
+.hero{padding:120px 32px 80px;max-width:1160px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:var(--text);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 14px 5px 8px;border-radius:var(--r-full);margin-bottom:32px}
+.hero-badge-dot{width:6px;height:6px;background:var(--text);border-radius:50%;animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+.hero-title{font-size:clamp(52px,8vw,100px);font-weight:800;line-height:.94;letter-spacing:-.045em;color:var(--text);margin-bottom:28px;max-width:820px}
+.hero-title-line2{display:inline-flex;align-items:center;gap:14px;flex-wrap:wrap}
+.hero-green-pill{display:inline-block;background:var(--green);padding:4px 18px 8px;border-radius:12px;line-height:1.05}
+.hero-sub{font-size:17px;font-weight:400;color:var(--text-3);max-width:480px;line-height:1.75;margin-bottom:40px}
+.hero-ctas{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:64px}
+.hero-stats{display:flex;gap:0;border:1.5px solid var(--border);border-radius:var(--r-xl);overflow:hidden;width:fit-content;background:var(--white)}
+.hero-stat{padding:20px 32px;border-right:1.5px solid var(--border)}
+.hero-stat:last-child{border-right:none}
+.hero-stat-num{font-size:30px;font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--text)}
+.hero-stat-label{font-size:12px;color:var(--text-3);margin-top:3px}
+.section{max-width:1160px;margin:0 auto;padding:80px 32px}
+.section-tag{display:inline-flex;align-items:center;gap:6px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-full);padding:4px 12px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:16px}
+.section-tag-dot{width:5px;height:5px;background:var(--green-3);border-radius:50%}
+.section-h2{font-size:clamp(30px,4vw,50px);font-weight:800;letter-spacing:-.035em;line-height:1.05;color:var(--text);margin-bottom:14px}
+.section-lead{font-size:16px;color:var(--text-3);max-width:460px;line-height:1.75}
+.steps-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:48px}
+.step-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-xl);padding:28px 24px;transition:border-color .18s,box-shadow .18s}
+.step-card:hover{border-color:var(--green-3);box-shadow:0 4px 20px rgba(32,232,83,.10)}
+.step-num{width:28px;height:28px;border-radius:50%;background:var(--green);color:var(--text);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.step-name{font-size:17px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+.step-desc{font-size:14px;color:var(--text-3);line-height:1.65}
+.svc-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:40px}
+.svc-chip{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-full);padding:9px 18px;font-size:13px;font-weight:600;color:var(--text-2);transition:all .15s;cursor:default}
+.svc-chip:hover{background:var(--green);border-color:var(--green);color:var(--text)}
+.faq-stack{display:flex;flex-direction:column;gap:6px;margin-top:48px}
+.faq-item{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:border-color .18s}
+.faq-item.open{border-color:var(--border-2)}
+.faq-btn{width:100%;padding:18px 22px;background:transparent;border:none;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:var(--font);font-size:15px;font-weight:700;color:var(--text);cursor:pointer;text-align:left}
+.faq-icon{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--surface-2);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:17px;color:var(--text);line-height:1;transition:transform .22s,background .18s}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--green);border-color:var(--green)}
+.faq-body{display:none;padding:0 22px 18px;font-size:14px;color:var(--text-3);line-height:1.75}
+.faq-item.open .faq-body{display:block}
+.cta-band{background:var(--text);border-radius:var(--r-2xl);margin:0 32px 80px;padding:72px 60px;text-align:center;position:relative;overflow:hidden}
+.cta-band::after{content:'';position:absolute;bottom:-100px;left:50%;transform:translateX(-50%);width:480px;height:480px;background:radial-gradient(circle,rgba(59,255,108,.12) 0%,transparent 60%);pointer-events:none}
+.cta-band h2{font-size:clamp(32px,4.5vw,54px);font-weight:800;letter-spacing:-.04em;color:#fff;line-height:1.05;margin-bottom:14px}
+.cta-band p{font-size:15px;color:#777;max-width:400px;margin:0 auto 32px}
+footer{border-top:1.5px solid var(--border);padding:28px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.foot-logo{font-size:18px;font-weight:800;letter-spacing:-.05em;color:var(--text)}
+.foot-logo-dot{color:var(--green-3)}
+.foot-links{display:flex;gap:20px}
+.foot-links a{font-size:12px;color:var(--text-4);text-decoration:none;transition:color .15s}
+.foot-links a:hover{color:var(--text-3)}
+.foot-copy{font-size:12px;color:var(--text-4)}
+
+/* ================================================================
+   ESTIMATEUR — DA ERE uniforme, fond clair
+================================================================ */
+.est-shell{min-height:100vh;background:var(--bg);padding-top:60px}
+.est-body{max-width:660px;margin:0 auto;padding:48px 24px 80px}
+.est-breadcrumb{display:flex;align-items:center;gap:0;margin-bottom:36px;overflow-x:auto;padding-bottom:2px}
+.est-crumb{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--text-4);white-space:nowrap;padding:6px 0;flex-shrink:0}
+.est-crumb.active{color:var(--text)}
+.est-crumb.done{color:var(--green-ink)}
+.est-crumb-num{width:22px;height:22px;border-radius:50%;flex-shrink:0;background:var(--surface-2);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--text-4);transition:all .2s}
+.est-crumb.active .est-crumb-num{background:var(--text);border-color:var(--text);color:#fff}
+.est-crumb.done .est-crumb-num{background:var(--green);border-color:var(--green);color:var(--text)}
+.est-crumb-sep{width:20px;height:1.5px;background:var(--border);flex-shrink:0;margin:0 4px}
+.est-crumb.done+.est-crumb-sep{background:var(--green)}
+.est-progress-bar{height:2px;background:var(--border);border-radius:99px;margin-bottom:40px;overflow:hidden}
+.est-progress-fill{height:100%;background:var(--text);border-radius:99px;transition:width .4s cubic-bezier(.4,0,.2,1)}
+.est-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-2xl);padding:44px 40px;box-shadow:var(--shadow)}
+.est-step-tag{display:inline-flex;align-items:center;gap:6px;background:var(--green);color:var(--text);font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:var(--r-full);margin-bottom:14px}
+.est-card-title{font-size:26px;font-weight:800;letter-spacing:-.03em;color:var(--text);line-height:1.15;margin-bottom:6px}
+.est-card-desc{font-size:14px;color:var(--text-3);margin-bottom:36px}
+.f{margin-bottom:26px}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.f label{display:block;font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px;letter-spacing:-.005em}
+.f label .opt{font-weight:500;color:var(--text-4);font-size:12px}
+.f label .hint{display:block;font-size:12px;font-weight:400;color:var(--text-3);margin-top:2px;line-height:1.5}
+input[type=text],input[type=email],input[type=number],input[type=tel],input[type=url],select,textarea{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r-md);padding:11px 14px;font-family:var(--font);font-size:14px;font-weight:500;color:var(--text);outline:none;transition:border-color .15s,box-shadow .15s;appearance:none;-webkit-appearance:none}
+input:focus,select:focus,textarea:focus{border-color:var(--text);box-shadow:0 0 0 3px rgba(10,10,10,.06);background:var(--white)}
+input::placeholder,textarea::placeholder{color:var(--text-4)}
+select{background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%235C5C5C' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+input[type=range]{width:100%;height:4px;padding:0;background:var(--border);border:none;border-radius:99px;cursor:pointer;accent-color:var(--text)}
+.slider-val{font-size:22px;font-weight:800;letter-spacing:-.03em;color:var(--text);margin-top:10px}
+.rc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(136px,1fr));gap:8px}
+.rc{position:relative;cursor:pointer}
+.rc input{position:absolute;opacity:0;width:0;height:0}
+.rc-inner{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r-lg);padding:16px 14px;font-size:13px;font-weight:600;color:var(--text-3);transition:all .15s;text-align:center;display:flex;flex-direction:column;align-items:center;gap:7px;line-height:1.3}
+.rc-inner .em{font-size:22px}
+.rc input:checked+.rc-inner{background:var(--text);border-color:var(--text);color:#fff}
+.rc:hover .rc-inner{border-color:var(--border-2)}
+.cb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:8px}
+.cb{position:relative;cursor:pointer}
+.cb input{position:absolute;opacity:0;width:0;height:0}
+.cb-inner{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r-md);padding:12px 14px;font-size:13px;font-weight:600;color:var(--text-3);transition:all .15s;display:flex;align-items:center;gap:10px}
+.cb-mark{width:16px;height:16px;border-radius:5px;flex-shrink:0;border:1.5px solid var(--border-2);background:var(--white);display:flex;align-items:center;justify-content:center;transition:all .15s}
+.cb input:checked+.cb-inner{background:var(--white);border-color:var(--text);color:var(--text)}
+.cb input:checked+.cb-inner .cb-mark{background:var(--text);border-color:var(--text)}
+.cb input:checked+.cb-inner .cb-mark::after{content:'✓';font-size:10px;color:#fff;font-weight:800}
+.est-nav-form{display:flex;justify-content:space-between;align-items:center;margin-top:36px;padding-top:28px;border-top:1.5px solid var(--border)}
+.btn-back{background:transparent;border:1.5px solid var(--border);color:var(--text-3);font-family:var(--font);font-size:13px;font-weight:700;padding:11px 22px;border-radius:var(--r-full);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:6px}
+.btn-back:hover{border-color:var(--border-2);color:var(--text)}
+.btn-next{background:var(--text);color:#fff;font-family:var(--font);font-size:13px;font-weight:800;padding:11px 26px;border-radius:var(--r-full);border:none;cursor:pointer;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;transition:all .15s}
+.btn-next:hover{background:#1c1c1c;transform:translateY(-1px)}
+.f-err{font-size:12px;color:#D93025;margin-top:5px;display:none;font-weight:600}
+
+/* ================================================================
+   RÉSULTAT — 100% libre + 3 capture triggers
+================================================================ */
+.res-shell{background:var(--bg);min-height:100vh;padding-top:60px}
+.res-body{max-width:860px;margin:0 auto;padding:52px 24px 80px}
+.res-hero{margin-bottom:40px}
+.res-eyebrow{display:inline-flex;align-items:center;gap:7px;background:var(--green);color:var(--text);font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px 4px 8px;border-radius:var(--r-full);margin-bottom:20px}
+.res-eyebrow-dot{width:5px;height:5px;background:var(--text);border-radius:50%}
+.res-title{font-size:clamp(34px,5.5vw,60px);font-weight:800;letter-spacing:-.04em;line-height:1.04;color:var(--text)}
+.res-price-card{background:var(--text);border-radius:var(--r-2xl);padding:52px 44px;margin-bottom:16px;position:relative;overflow:hidden}
+.res-price-card::before{content:'';position:absolute;top:-80px;right:-80px;width:340px;height:340px;background:radial-gradient(circle,rgba(59,255,108,.12) 0%,transparent 65%)}
+.res-price-card::after{content:'';position:absolute;bottom:-60px;left:30px;width:200px;height:200px;background:radial-gradient(circle,rgba(59,255,108,.06) 0%,transparent 65%)}
+.res-price-eyebrow{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#484848;font-weight:700;margin-bottom:12px}
+.res-price-main{font-size:clamp(64px,12vw,108px);font-weight:800;letter-spacing:-.05em;line-height:.92;color:var(--green);display:block;margin-bottom:14px}
+.res-price-range{font-size:14px;color:#555}
+.res-price-range strong{color:#888;font-weight:700}
+.res-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:24px}
+.res-tag{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);border-radius:var(--r-full);padding:4px 12px;font-size:11px;font-weight:700;color:#777;letter-spacing:.03em}
+.res-tag.g{background:rgba(59,255,108,.10);border-color:rgba(59,255,108,.20);color:var(--green)}
+.res-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.res-meta-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-xl);padding:22px 20px;transition:border-color .18s,box-shadow .18s}
+.res-meta-card:hover{border-color:var(--green-3);box-shadow:0 4px 16px rgba(32,232,83,.08)}
+.res-meta-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-4);margin-bottom:8px;font-weight:700}
+.res-meta-val{font-size:26px;font-weight:800;letter-spacing:-.03em;color:var(--text);line-height:1}
+.res-meta-sub{font-size:11px;color:var(--text-4);margin-top:4px}
+.res-struct-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-xl);padding:24px 22px;display:flex;gap:16px;align-items:flex-start;margin-bottom:16px;transition:border-color .18s}
+.res-struct-card:hover{border-color:var(--green-3)}
+.res-struct-icon{width:40px;height:40px;border-radius:var(--r-md);background:var(--green);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px}
+.res-struct-title{font-size:15px;font-weight:800;margin-bottom:5px;letter-spacing:-.01em}
+.res-struct-desc{font-size:13px;color:var(--text-3);line-height:1.65}
+.res-section{margin-bottom:32px}
+.res-section-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.res-section-bar{width:3px;height:18px;border-radius:2px;background:var(--text);flex-shrink:0}
+.res-section-title{font-size:17px;font-weight:800;letter-spacing:-.02em}
+.factor-list{display:flex;flex-direction:column;gap:7px}
+.factor{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-md);padding:13px 16px;font-size:13px;color:var(--text-2);line-height:1.5;display:flex;gap:10px;align-items:flex-start;transition:border-color .15s}
+.factor:hover{border-color:var(--border-2)}
+.factor.up{border-left:3px solid #22C55E}
+.factor.dn{border-left:3px solid var(--border-2)}
+.factor-ico{font-size:14px;flex-shrink:0;margin-top:1px}
+.breakdown{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-xl);overflow:hidden}
+.bd{display:flex;justify-content:space-between;align-items:center;padding:12px 22px;border-bottom:1px solid var(--border);font-size:13px}
+.bd:last-child{border-bottom:none}
+.bd.total{padding:16px 22px;background:var(--surface-2);font-size:16px;font-weight:800}
+.bd-l{color:var(--text-3)}
+.bd-r{font-weight:700;color:var(--text)}
+.bd-pill{font-size:11px;font-weight:800;padding:2px 8px;border-radius:var(--r-full)}
+.bd-pill.up{background:#DCFCE7;color:#15803D}
+.bd-pill.dn{background:var(--surface-2);color:var(--text-4)}
+.options-list{display:flex;flex-direction:column;gap:8px}
+.option{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-lg);padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px;transition:border-color .18s,box-shadow .18s}
+.option:hover{border-color:var(--green-3);box-shadow:0 2px 12px rgba(32,232,83,.07)}
+.option-name{font-size:14px;font-weight:800;margin-bottom:2px}
+.option-desc{font-size:12px;color:var(--text-3)}
+.option-price{font-size:20px;font-weight:800;letter-spacing:-.02em;color:var(--green-ink);white-space:nowrap}
+.peda-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.peda{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-xl);padding:24px 20px;transition:border-color .18s}
+.peda:hover{border-color:var(--green-3)}
+.peda-ico{font-size:26px;margin-bottom:12px}
+.peda-title{font-size:14px;font-weight:800;letter-spacing:-.01em;margin-bottom:7px}
+.peda-text{font-size:13px;color:var(--text-3);line-height:1.65}
+
+/* ================================================================
+   TRIGGER 1 — "Reçois ton estimation par email"
+   Bannière inline sur la page résultat, juste après les meta cards
+================================================================ */
+.capture-email-block{
+  background:var(--white);
+  border:1.5px solid var(--border);
+  border-radius:var(--r-2xl);
+  padding:32px 36px;
+  margin-bottom:24px;
+  display:flex; gap:32px; align-items:center;
+  position:relative; overflow:hidden;
+  transition:border-color .2s,box-shadow .2s;
+}
+.capture-email-block:hover{border-color:var(--green-3);box-shadow:0 4px 24px rgba(59,255,108,.08)}
+.capture-email-block::before{
+  content:'';position:absolute;right:-40px;top:-40px;
+  width:180px;height:180px;
+  background:radial-gradient(circle,rgba(59,255,108,.12) 0%,transparent 65%);
+}
+.cap-email-left{flex:1;min-width:0}
+.cap-email-icon{
+  width:44px;height:44px;border-radius:12px;
+  background:var(--green);display:flex;align-items:center;
+  justify-content:center;font-size:20px;margin-bottom:14px;
+}
+.cap-email-title{
+  font-size:18px;font-weight:800;letter-spacing:-.025em;
+  margin-bottom:6px;color:var(--text);
+}
+.cap-email-sub{font-size:13px;color:var(--text-3);line-height:1.65;max-width:340px}
+.cap-email-perks{
+  display:flex;flex-direction:column;gap:5px;margin-top:14px;
+}
+.cap-email-perk{
+  display:flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;color:var(--text-2);
+}
+.cap-email-perk::before{
+  content:'✓';font-size:11px;font-weight:800;
+  width:18px;height:18px;border-radius:50%;
+  background:var(--green);color:var(--text);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.cap-email-right{flex-shrink:0;min-width:260px}
+.cap-email-form{display:flex;flex-direction:column;gap:10px}
+.cap-email-input{
+  background:var(--bg);border:1.5px solid var(--border);
+  border-radius:var(--r-md);padding:11px 14px;
+  font-family:var(--font);font-size:14px;font-weight:500;color:var(--text);
+  outline:none;transition:border-color .15s;width:100%;
+}
+.cap-email-input:focus{border-color:var(--text);box-shadow:0 0 0 3px rgba(10,10,10,.06);background:var(--white)}
+.cap-email-btn{
+  background:var(--text);color:#fff;font-family:var(--font);
+  font-size:13px;font-weight:800;padding:12px 20px;
+  border-radius:var(--r-full);border:none;cursor:pointer;
+  width:100%;letter-spacing:-.01em;transition:background .15s;
+}
+.cap-email-btn:hover{background:#1c1c1c}
+.cap-email-note{font-size:11px;color:var(--text-4);text-align:center;margin-top:4px}
+.cap-email-success{
+  display:none;text-align:center;padding:20px;
+}
+.cap-email-success-ico{font-size:36px;margin-bottom:10px}
+.cap-email-success-title{font-size:16px;font-weight:800;margin-bottom:5px}
+.cap-email-success-sub{font-size:13px;color:var(--text-3)}
+
+/* ================================================================
+   TRIGGER 2 — Bannière "Rejoins le réseau ERE AGENCY"
+   Après la section pédagogie, avant le CTA expert
+================================================================ */
+.capture-network-block{
+  background:var(--text);border-radius:var(--r-2xl);
+  padding:48px 44px;margin-bottom:0;margin-top:48px;
+  position:relative;overflow:hidden;
+}
+.capture-network-block::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:280px;height:280px;
+  background:radial-gradient(circle,rgba(59,255,108,.15) 0%,transparent 65%);
+  pointer-events:none;
+}
+.cnb-inner{display:flex;gap:48px;align-items:flex-start;position:relative;z-index:1}
+.cnb-left{flex:1}
+.cnb-eyebrow{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(59,255,108,.12);border:1px solid rgba(59,255,108,.2);
+  border-radius:var(--r-full);padding:4px 12px;
+  font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--green);margin-bottom:16px;
+}
+.cnb-title{
+  font-size:clamp(22px,3.5vw,32px);font-weight:800;
+  letter-spacing:-.035em;color:#fff;line-height:1.1;margin-bottom:12px;
+}
+.cnb-sub{font-size:14px;color:#888;line-height:1.7;max-width:360px;margin-bottom:20px}
+.cnb-perks{display:flex;flex-direction:column;gap:10px}
+.cnb-perk{display:flex;align-items:flex-start;gap:10px}
+.cnb-perk-dot{
+  width:20px;height:20px;border-radius:50%;
+  background:var(--green);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;color:var(--text);
+  margin-top:1px;
+}
+.cnb-perk-text{font-size:13px;color:#aaa;line-height:1.5}
+.cnb-perk-text strong{color:#ddd;font-weight:700}
+.cnb-right{flex-shrink:0;min-width:280px}
+.cnb-form{display:flex;flex-direction:column;gap:10px}
+.cnb-input{
+  background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.10);
+  border-radius:var(--r-md);padding:12px 14px;
+  font-family:var(--font);font-size:14px;font-weight:500;color:#fff;
+  outline:none;transition:border-color .15s;width:100%;
+}
+.cnb-input::placeholder{color:#555}
+.cnb-input:focus{border-color:rgba(59,255,108,.4);background:rgba(255,255,255,.08)}
+.cnb-select{
+  background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.10);
+  border-radius:var(--r-md);padding:12px 14px;
+  font-family:var(--font);font-size:14px;font-weight:500;color:#777;
+  outline:none;transition:border-color .15s;width:100%;
+  appearance:none;
+}
+.cnb-select:focus{border-color:rgba(59,255,108,.4);color:#fff}
+.cnb-select option{background:#1a1a1a;color:#fff}
+.cnb-consent{display:flex;align-items:flex-start;gap:10px}
+.cnb-consent input[type=checkbox]{width:16px;height:16px;flex-shrink:0;margin-top:2px;accent-color:var(--green)}
+.cnb-consent-text{font-size:12px;color:#666;line-height:1.55}
+.cnb-consent-text a{color:var(--green);text-decoration:none}
+.cnb-btn{
+  background:var(--green);color:var(--text);
+  font-family:var(--font);font-size:13px;font-weight:800;
+  padding:13px 20px;border-radius:var(--r-full);border:none;cursor:pointer;
+  width:100%;letter-spacing:-.01em;transition:background .15s;
+}
+.cnb-btn:hover{background:var(--green-2)}
+.cnb-note{font-size:11px;color:#555;text-align:center;margin-top:4px}
+.cnb-success{display:none;text-align:center;padding:24px}
+.cnb-success-ico{font-size:40px;margin-bottom:12px}
+.cnb-success-title{font-size:18px;font-weight:800;color:#fff;margin-bottom:6px}
+.cnb-success-sub{font-size:13px;color:#888;line-height:1.6}
+
+/* ================================================================
+   TRIGGER 3 — Exit intent modal
+   Se déclenche quand la souris quitte le viewport vers le haut
+================================================================ */
+.exit-overlay{
+  display:none;position:fixed;inset:0;z-index:500;
+  background:rgba(10,10,10,.6);backdrop-filter:blur(8px);
+  align-items:center;justify-content:center;padding:24px;
+}
+.exit-overlay.on{display:flex;animation:fadeIn .25s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.exit-modal{
+  background:var(--white);border-radius:var(--r-2xl);
+  padding:48px 44px;max-width:480px;width:100%;
+  position:relative;box-shadow:var(--shadow-md);
+  animation:slideUp .3s ease;
+}
+@keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.exit-close{
+  position:absolute;top:16px;right:16px;
+  width:32px;height:32px;border-radius:50%;
+  background:var(--surface-2);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:16px;color:var(--text-3);
+  transition:all .15s;
+}
+.exit-close:hover{background:var(--surface-3);color:var(--text)}
+.exit-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--green);color:var(--text);
+  font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 10px;border-radius:var(--r-full);margin-bottom:16px;
+}
+.exit-title{font-size:24px;font-weight:800;letter-spacing:-.03em;margin-bottom:8px;line-height:1.15}
+.exit-sub{font-size:14px;color:var(--text-3);line-height:1.65;margin-bottom:24px}
+.exit-highlight{
+  background:var(--bg);border:1.5px solid var(--border);
+  border-radius:var(--r-xl);padding:18px 20px;margin-bottom:24px;
+  display:flex;gap:14px;align-items:center;
+}
+.exit-price-preview{
+  font-size:28px;font-weight:800;letter-spacing:-.04em;
+  color:var(--text);line-height:1;
+}
+.exit-price-label{font-size:11px;color:var(--text-4);margin-top:2px;font-weight:600}
+.exit-price-sep{width:1px;background:var(--border);align-self:stretch}
+.exit-price-note{font-size:12px;color:var(--text-3);line-height:1.5;flex:1}
+.exit-form{display:flex;flex-direction:column;gap:10px}
+.exit-input{
+  background:var(--bg);border:1.5px solid var(--border);
+  border-radius:var(--r-md);padding:12px 14px;
+  font-family:var(--font);font-size:14px;font-weight:500;color:var(--text);
+  outline:none;transition:border-color .15s;width:100%;
+}
+.exit-input:focus{border-color:var(--text);box-shadow:0 0 0 3px rgba(10,10,10,.06);background:var(--white)}
+.exit-btn{
+  background:var(--text);color:#fff;font-family:var(--font);
+  font-size:13px;font-weight:800;padding:13px;
+  border-radius:var(--r-full);border:none;cursor:pointer;
+  width:100%;letter-spacing:-.01em;transition:background .15s;
+}
+.exit-btn:hover{background:#1c1c1c}
+.exit-skip{
+  text-align:center;margin-top:10px;
+  font-size:12px;color:var(--text-4);cursor:pointer;
+  transition:color .15s;
+}
+.exit-skip:hover{color:var(--text-3)}
+.exit-success{display:none;text-align:center;padding:20px 0}
+.exit-success-ico{font-size:44px;margin-bottom:12px}
+.exit-success-title{font-size:20px;font-weight:800;margin-bottom:8px}
+.exit-success-sub{font-size:14px;color:var(--text-3);line-height:1.65}
+
+/* ================================================================
+   FLOATING SAVE BAR
+   Apparaît après 30s sur la page résultat (discret, en bas)
+================================================================ */
+.float-bar{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
+  z-index:200;transition:transform .4s cubic-bezier(.34,1.56,.64,1);
+  background:var(--text);border-radius:var(--r-full);
+  padding:12px 20px 12px 16px;
+  display:flex;align-items:center;gap:14px;
+  box-shadow:0 8px 32px rgba(0,0,0,.18);
+  width:fit-content;max-width:calc(100vw - 48px);
+}
+.float-bar.show{transform:translateX(-50%) translateY(0)}
+.float-bar-left{display:flex;align-items:center;gap:10px}
+.float-bar-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:blink 2s ease-in-out infinite}
+.float-bar-text{font-size:13px;font-weight:700;color:#fff;white-space:nowrap}
+.float-bar-input{
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+  border-radius:var(--r-full);padding:8px 14px;
+  font-family:var(--font);font-size:13px;color:#fff;outline:none;
+  width:200px;transition:border-color .15s;
+}
+.float-bar-input::placeholder{color:#666}
+.float-bar-input:focus{border-color:rgba(59,255,108,.4)}
+.float-bar-btn{
+  background:var(--green);color:var(--text);
+  font-family:var(--font);font-size:12px;font-weight:800;
+  padding:8px 16px;border-radius:var(--r-full);border:none;
+  cursor:pointer;transition:background .15s;white-space:nowrap;
+}
+.float-bar-btn:hover{background:var(--green-2)}
+.float-bar-close{
+  width:24px;height:24px;border-radius:50%;
+  background:rgba(255,255,255,.08);border:none;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  color:#666;font-size:14px;transition:all .15s;flex-shrink:0;
+}
+.float-bar-close:hover{background:rgba(255,255,255,.15);color:#fff}
+
+/* CTA expert */
+.res-cta{background:var(--surface-2);border:1.5px solid var(--border);border-radius:var(--r-2xl);padding:52px 44px;text-align:center;margin-top:0;position:relative;overflow:hidden}
+.res-cta::before{content:'';position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);width:300px;height:300px;background:radial-gradient(circle,rgba(59,255,108,.08) 0%,transparent 60%)}
+.res-cta-tag{display:inline-flex;align-items:center;gap:6px;background:var(--green);color:var(--text);font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:var(--r-full);margin-bottom:14px}
+.res-cta h2{font-size:clamp(24px,3.5vw,38px);font-weight:800;letter-spacing:-.04em;color:var(--text);margin-bottom:10px;line-height:1.1}
+.res-cta p{font-size:14px;color:var(--text-3);max-width:380px;margin:0 auto 24px;line-height:1.7}
+.res-restart{text-align:center;margin-top:40px}
+
+/* LOADER */
+.loader{display:none;position:fixed;inset:0;z-index:999;background:rgba(244,244,240,.94);backdrop-filter:blur(16px);align-items:center;justify-content:center;flex-direction:column;gap:20px}
+.loader.on{display:flex}
+.loader-ring{width:40px;height:40px;border:2.5px solid var(--border);border-top-color:var(--text);border-radius:50%;animation:spin .75s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader-txt{font-size:14px;font-weight:600;color:var(--text-3)}
+
+/* Pages légales */
+.legal-shell{background:var(--bg);padding-top:60px;min-height:100vh}
+.legal-body{max-width:700px;margin:0 auto;padding:52px 24px 80px}
+.legal-title{font-size:clamp(32px,5vw,48px);font-weight:800;letter-spacing:-.04em;margin-bottom:32px}
+.legal-p{font-size:15px;color:var(--text-3);line-height:1.8;margin-bottom:16px}
+.legal-p strong{color:var(--text);font-weight:700}
+
+/* Animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.a{animation:fadeUp .45s ease both}
+.a1{animation-delay:.04s}.a2{animation-delay:.09s}.a3{animation-delay:.14s}
+.a4{animation-delay:.19s}.a5{animation-delay:.24s}.a6{animation-delay:.29s}.a7{animation-delay:.34s}
+
+/* Responsive */
+@media(max-width:720px){
+  .nav{padding:0 18px}
+  .hero{padding:100px 18px 60px}
+  .section{padding:56px 18px}
+  .cta-band{margin:0 18px 60px;padding:48px 24px}
+  footer{padding:22px 18px}
+  .est-body,.res-body,.legal-body{padding-left:14px;padding-right:14px}
+  .est-card{padding:28px 20px}
+  .f-row{grid-template-columns:1fr}
+  .res-meta{grid-template-columns:1fr 1fr}
+  .res-price-card{padding:36px 24px}
+  .capture-email-block{flex-direction:column;padding:28px 24px}
+  .cap-email-right{min-width:0;width:100%}
+  .cnb-inner{flex-direction:column;gap:28px}
+  .cnb-right{min-width:0;width:100%}
+  .res-cta{padding:44px 24px}
+  .float-bar{flex-direction:column;border-radius:var(--r-xl);padding:16px 18px;align-items:stretch;gap:10px}
+  .float-bar-input{width:100%}
+  .float-bar.show{transform:translateX(-50%) translateY(0)}
+  .hero-stats{flex-direction:column;width:100%}
+  .hero-stat{border-right:none;border-bottom:1.5px solid var(--border)}
+  .hero-stat:last-child{border-bottom:none}
+}
+@media(max-width:460px){
+  .res-meta{grid-template-columns:1fr}
+  .exit-modal{padding:36px 24px}
+}
+  </style>
+</head>
+<body>
+
+<!-- LOADING -->
+<div class="loader" id="loader">
+  <div class="loader-ring"></div>
+  <div class="loader-txt">Calcul de ton estimation en cours…</div>
+</div>
+
+<!-- ================================================================
+     EXIT INTENT MODAL — Trigger 3
+================================================================ -->
+<div class="exit-overlay" id="exit-overlay" onclick="closeExit(event)">
+  <div class="exit-modal">
+    <div class="exit-close" onclick="dismissExit()">×</div>
+    <div class="exit-tag">⚡ Avant de partir</div>
+    <h2 class="exit-title">Sauvegarde ton estimation, c'est gratuit</h2>
+    <p class="exit-sub">Tu pars sans récupérer ton résultat ? On te l'envoie par email — prêt à partager à un client ou retrouver plus tard.</p>
+    <div class="exit-highlight">
+      <div>
+        <div class="exit-price-preview" id="exit-price-preview">—</div>
+        <div class="exit-price-label">Ton prix estimé</div>
+      </div>
+      <div class="exit-price-sep"></div>
+      <div class="exit-price-note">Fourchette personnalisée + taux horaire + conseils pour défendre ton prix client</div>
+    </div>
+    <div class="exit-form" id="exit-form">
+      <input type="email" class="exit-input" id="exit-email" placeholder="ton@email.com">
+      <button class="exit-btn" onclick="submitExit()">Recevoir mon estimation →</button>
+      <div class="exit-skip" onclick="dismissExit()">Non merci, je quitte sans sauvegarder</div>
+    </div>
+    <div class="exit-success" id="exit-success">
+      <div class="exit-success-ico">🎉</div>
+      <div class="exit-success-title">C'est dans ta boîte !</div>
+      <div class="exit-success-sub">Estimation envoyée. On sera peut-être amenés à travailler ensemble — à bientôt chez ERE AGENCY.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     FLOATING SAVE BAR — Trigger bonus (après 30s)
+================================================================ -->
+<div class="float-bar" id="float-bar">
+  <div class="float-bar-left">
+    <div class="float-bar-dot"></div>
+    <div class="float-bar-text">📩 Reçois ton estimation par email</div>
+  </div>
+  <input type="email" class="float-bar-input" id="float-bar-email" placeholder="ton@email.com">
+  <button class="float-bar-btn" onclick="submitFloatBar()">Envoyer</button>
+  <button class="float-bar-close" onclick="dismissFloatBar()">×</button>
+</div>
+
+<!-- ================================================================
+     LANDING
+================================================================ -->
+<div id="page-landing" class="page active">
+  <nav class="nav">
+    <a class="nav-logo" href="#" onclick="go('landing')">ere<span class="nav-logo-dot"></span></a>
+    <div class="nav-right">
+      <a class="nav-link" href="https://ere-agency.fr" target="_blank">ere-agency.fr</a>
+      <button class="nav-btn" onclick="go('estimateur')">Estimer mon prix →</button>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-badge"><div class="hero-badge-dot"></div>Outil gratuit · 2026</div>
+    <h1 class="hero-title">Ton prix freelance,<br><span class="hero-title-line2">calculé en <span class="hero-green-pill">2 min</span></span></h1>
+    <p class="hero-sub">Stop à l'improvisation tarifaire. Obtiens une fourchette personnalisée selon ton profil, ton service et ton marché — explications incluses.</p>
+    <div class="hero-ctas">
+      <button class="btn-primary" onclick="go('estimateur')">Calcule mon prix gratuitement →</button>
+      <a class="btn-ghost" href="https://ere-agency.fr" target="_blank">Découvrir ERE AGENCY</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num">10+</div><div class="hero-stat-label">Services couverts</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">30+</div><div class="hero-stat-label">Critères analysés</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">2 min</div><div class="hero-stat-label">Chrono pour ton résultat</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">100%</div><div class="hero-stat-label">Gratuit & sans engagement</div></div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="section-tag"><div class="section-tag-dot"></div>Comment ça marche</div>
+    <h2 class="section-h2">Simple, rapide, transparent.</h2>
+    <p class="section-lead">Un algorithme paramétré sur les réalités du marché 2026. Pas de formule magique, juste de la méthode.</p>
+    <div class="steps-row">
+      <div class="step-card"><div class="step-num">1</div><div class="step-name">Ton profil</div><p class="step-desc">Niveau, expérience, statut, zone géo. 2 minutes chrono.</p></div>
+      <div class="step-card"><div class="step-num">2</div><div class="step-name">Ton service</div><p class="step-desc">Ads, SEO, site web, social media… Questions spécifiques selon ta prestation.</p></div>
+      <div class="step-card"><div class="step-num">3</div><div class="step-name">Ton marché</div><p class="step-desc">Type de client, urgence, secteur, positionnement. Tout ce qui fait bouger les prix.</p></div>
+      <div class="step-card"><div class="step-num">4</div><div class="step-name">Ton estimation</div><p class="step-desc">Fourchette min/max, taux horaire, détail du calcul et conseils pour défendre ton prix.</p></div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="section-tag"><div class="section-tag-dot"></div>Services couverts</div>
+    <h2 class="section-h2">Pour quel service<br>tu veux te tarifer ?</h2>
+    <div class="svc-row">
+      <span class="svc-chip">📱 Publicité Ads</span><span class="svc-chip">🌐 Site web</span><span class="svc-chip">🔍 SEO</span><span class="svc-chip">📣 Social Media</span><span class="svc-chip">🎨 Design / UI-UX</span><span class="svc-chip">📧 Email / CRM</span><span class="svc-chip">✍️ Copywriting</span><span class="svc-chip">⚙️ Automation</span><span class="svc-chip">📊 Tracking / GA4</span><span class="svc-chip">➕ Autre</span>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="section-tag"><div class="section-tag-dot"></div>Questions fréquentes</div>
+    <h2 class="section-h2">Tu te poses<br>des questions ?</h2>
+    <div class="faq-stack">
+      <div class="faq-item"><button class="faq-btn" onclick="faq(this)">L'outil est-il vraiment gratuit ? <div class="faq-icon">+</div></button><div class="faq-body">Oui, 100%. ERE AGENCY l'offre aux freelances en marketing digital pour les aider à mieux se positionner. Ton estimation t'appartient — aucune obligation de laisser ton email.</div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="faq(this)">Comment sont calculés les prix ? <div class="faq-icon">+</div></button><div class="faq-body">Taux horaire de base selon ton niveau et ta ville, puis multiplicateurs (urgence, complexité, taille client, secteur…). Chaque facteur est expliqué dans ton résultat.</div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="faq(this)">Qu'est-ce que le réseau ERE Agency ? <div class="faq-icon">+</div></button><div class="faq-body">Un vivier de freelances qualifiés en marketing digital que l'on sollicite pour les missions de nos clients. Si tu rejoins le réseau, on peut te contacter directement quand un projet correspond à ton profil — aucune obligation de ta part.</div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="faq(this)">Forfait ou taux horaire, que choisir ? <div class="faq-icon">+</div></button><div class="faq-body">Le forfait est presque toujours plus avantageux : tu es payé pour la valeur livrée, pas le temps passé. L'outil te recommande la meilleure structure selon ton contexte.</div></div>
+    </div>
+  </div>
+
+  <div class="cta-band">
+    <h2>Arrête de sous-facturer.<br>Calcule ton vrai prix.</h2>
+    <p>2 minutes. Gratuit. Et si tu veux un avis d'expert, ERE AGENCY est là pour toi.</p>
+    <button class="btn-green" onclick="go('estimateur')">Commencer l'estimation →</button>
+  </div>
+
+  <footer>
+    <div class="foot-logo">ere<span class="foot-logo-dot">.</span></div>
+    <div class="foot-links">
+      <a href="https://ere-agency.fr" target="_blank">ere-agency.fr</a>
+      <a href="#" onclick="go('mentions')">Mentions légales</a>
+      <a href="#" onclick="go('privacy')">Confidentialité</a>
+    </div>
+    <p class="foot-copy">© 2026 ERE AGENCY</p>
+  </footer>
+</div>
+
+<!-- ================================================================
+     ESTIMATEUR
+================================================================ -->
+<div id="page-estimateur" class="page">
+  <nav class="nav">
+    <a class="nav-logo" href="#" onclick="go('landing')">ere<span class="nav-logo-dot"></span></a>
+    <div class="nav-right">
+      <span id="est-step-counter" style="font-size:13px;font-weight:700;color:var(--text-3)"></span>
+      <button class="nav-btn outline" onclick="go('landing')">← Retour</button>
+    </div>
+  </nav>
+  <div class="est-shell">
+    <div class="est-body">
+      <div class="est-breadcrumb" id="breadcrumb"></div>
+      <div class="est-progress-bar"><div class="est-progress-fill" id="prog-fill"></div></div>
+      <div class="est-card" id="est-card"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     RÉSULTAT — 100% libre + 3 capture triggers intégrés
+================================================================ -->
+<div id="page-resultat" class="page">
+  <nav class="nav">
+    <a class="nav-logo" href="#" onclick="go('landing')">ere<span class="nav-logo-dot"></span></a>
+    <div class="nav-right">
+      <button class="nav-btn outline" onclick="restart()">← Nouvelle estimation</button>
+      <button class="nav-btn" onclick="window.open('https://ere-agency.fr','_blank')">ere-agency.fr ↗</button>
+    </div>
+  </nav>
+
+  <div class="res-shell">
+    <div class="res-body">
+
+      <div class="res-hero a">
+        <div class="res-eyebrow"><div class="res-eyebrow-dot"></div>Estimation personnalisée · 100% gratuit</div>
+        <h1 class="res-title" id="res-h1">Voici ton prix recommandé 👇</h1>
+      </div>
+
+      <!-- Prix principal -->
+      <div class="res-price-card a a1">
+        <div class="res-price-eyebrow">PRIX FORFAIT RECOMMANDÉ</div>
+        <span class="res-price-main" id="r-price">—</span>
+        <div class="res-price-range" id="r-range">Fourchette : <strong>—</strong> — <strong>—</strong></div>
+        <div class="res-tags" id="r-tags"></div>
+      </div>
+
+      <!-- Méta cards -->
+      <div class="res-meta a a2">
+        <div class="res-meta-card"><div class="res-meta-label">Taux horaire</div><div class="res-meta-val" id="r-hourly">—</div><div class="res-meta-sub" id="r-hourly-range">—</div></div>
+        <div class="res-meta-card"><div class="res-meta-label">Heures estimées</div><div class="res-meta-val" id="r-hours">—</div><div class="res-meta-sub">pour cette mission</div></div>
+        <div class="res-meta-card"><div class="res-meta-label">Structure conseillée</div><div class="res-meta-val" id="r-struct">—</div><div class="res-meta-sub">recommandée</div></div>
+      </div>
+
+      <!-- ★ TRIGGER 1 — Email inline (après les méta, avant les facteurs) -->
+      <!-- Positionné ici car l'user vient de voir son résultat et est au max de son attention -->
+      <div class="capture-email-block a a2" id="cap-email-block">
+        <div class="cap-email-left">
+          <div class="cap-email-icon">📩</div>
+          <div class="cap-email-title">Reçois cette estimation par email</div>
+          <div class="cap-email-sub">Garde ton résultat à portée de main — idéal pour le partager à un client ou comparer avec tes prochains projets.</div>
+          <div class="cap-email-perks">
+            <span class="cap-email-perk">Résultat complet + détail du calcul</span>
+            <span class="cap-email-perk">Conseils pour défendre ton prix au client</span>
+            <span class="cap-email-perk">Ressources exclusives pour freelances</span>
+          </div>
+        </div>
+        <div class="cap-email-right">
+          <div class="cap-email-form" id="cap-email-form">
+            <input type="email" class="cap-email-input" id="cap-email-input" placeholder="ton@email.com">
+            <button class="cap-email-btn" onclick="submitCapEmail()">Recevoir mon estimation →</button>
+            <div class="cap-email-note">Gratuit · Aucun spam · Résiliable à tout moment</div>
+          </div>
+          <div class="cap-email-success" id="cap-email-success">
+            <div class="cap-email-success-ico">✅</div>
+            <div class="cap-email-success-title">C'est envoyé !</div>
+            <div class="cap-email-success-sub">Vérifie ta boîte — ton estimation t'attend.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Structure recommandée -->
+      <div class="res-struct-card a a3" id="r-struct-box">
+        <div class="res-struct-icon" id="r-struct-ico">💡</div>
+        <div><div class="res-struct-title" id="r-struct-title">—</div><div class="res-struct-desc" id="r-struct-desc">—</div></div>
+      </div>
+
+      <!-- Facteurs UP -->
+      <div class="res-section a a3" id="sec-up">
+        <div class="res-section-head"><div class="res-section-bar" style="background:var(--green-3)"></div><div class="res-section-title">Ce qui tire ton prix vers le haut</div></div>
+        <div class="factor-list" id="r-up"></div>
+      </div>
+
+      <!-- Facteurs DOWN -->
+      <div class="res-section a a4" id="sec-dn">
+        <div class="res-section-head"><div class="res-section-bar" style="background:var(--border-2)"></div><div class="res-section-title">Ce qui ajuste ton prix à la baisse</div></div>
+        <div class="factor-list" id="r-dn"></div>
+      </div>
+
+      <!-- Détail calcul -->
+      <div class="res-section a a4">
+        <div class="res-section-head"><div class="res-section-bar"></div><div class="res-section-title">Détail du calcul</div></div>
+        <div class="breakdown" id="r-breakdown"></div>
+      </div>
+
+      <!-- Options -->
+      <div class="res-section a a5" id="sec-opts">
+        <div class="res-section-head"><div class="res-section-bar" style="background:var(--border-2)"></div><div class="res-section-title">Options à proposer au client</div></div>
+        <div class="options-list" id="r-opts"></div>
+      </div>
+
+      <!-- Pédagogie -->
+      <div class="res-section a a5">
+        <div class="res-section-head"><div class="res-section-bar"></div><div class="res-section-title">Comment défendre ton prix</div></div>
+        <div class="peda-grid">
+          <div class="peda"><div class="peda-ico">🎯</div><div class="peda-title">Commence par la valeur</div><p class="peda-text">Explique le résultat que tu vas créer avant d'annoncer le prix. Le client achète une transformation, pas des heures.</p></div>
+          <div class="peda"><div class="peda-ico">⏸️</div><div class="peda-title">Annonce et tais-toi</div><p class="peda-text">Après avoir dit ton prix, fais une pause. Ne le justifie pas spontanément — le silence appartient à qui l'occupe.</p></div>
+          <div class="peda"><div class="peda-ico">📦</div><div class="peda-title">Propose 3 options</div><p class="peda-text">Basique / Standard / Premium. Le client choisit entre tes offres, pas entre toi et un concurrent.</p></div>
+          <div class="peda"><div class="peda-ico">🚩</div><div class="peda-title">Erreurs classiques</div><p class="peda-text">Sous-facturer "pour avoir la mission", accepter sans acompte, pas de deadline sur le devis — ces 3 erreurs coûtent cher.</p></div>
+        </div>
+      </div>
+
+      <!-- ★ TRIGGER 2 — Réseau ERE Agency (après la pédagogie, quand l'user est convaincu) -->
+      <div class="capture-network-block a a6">
+        <div class="cnb-inner">
+          <div class="cnb-left">
+            <div class="cnb-eyebrow">ERE AGENCY · Réseau freelances</div>
+            <h2 class="cnb-title">Tu cherches des missions<br>qui correspondent à ton profil ?</h2>
+            <p class="cnb-sub">ERE AGENCY travaille avec des freelances en marketing digital pour les missions de ses clients. Rejoindre notre réseau, c'est être contacté en premier quand un projet te correspond.</p>
+            <div class="cnb-perks">
+              <div class="cnb-perk"><div class="cnb-perk-dot">✓</div><div class="cnb-perk-text"><strong>Missions qualifiées</strong> — clients sérieux avec des budgets adaptés</div></div>
+              <div class="cnb-perk"><div class="cnb-perk-dot">✓</div><div class="cnb-perk-text"><strong>Aucune obligation</strong> — tu acceptes ou refuses chaque mission</div></div>
+              <div class="cnb-perk"><div class="cnb-perk-dot">✓</div><div class="cnb-perk-text"><strong>Réseau actif</strong> — ERE place des freelances régulièrement</div></div>
+            </div>
+          </div>
+          <div class="cnb-right">
+            <div class="cnb-form" id="cnb-form">
+              <input type="email" class="cnb-input" id="cnb-email" placeholder="Ton email pro">
+              <input type="text" class="cnb-input" id="cnb-name" placeholder="Ton prénom">
+              <select class="cnb-select" id="cnb-service">
+                <option value="" disabled selected>Ton service principal</option>
+                <option value="ads">📱 Publicité Ads</option>
+                <option value="site_web">🌐 Site web</option>
+                <option value="seo">🔍 SEO</option>
+                <option value="social_media">📣 Social Media</option>
+                <option value="design">🎨 Design / UI-UX</option>
+                <option value="email_crm">📧 Email / CRM</option>
+                <option value="copywriting">✍️ Copywriting</option>
+                <option value="automation">⚙️ Automation</option>
+                <option value="tracking">📊 Tracking / GA4</option>
+                <option value="autre">➕ Autre</option>
+              </select>
+              <div class="cnb-consent">
+                <input type="checkbox" id="cnb-consent">
+                <div class="cnb-consent-text">J'accepte qu'ERE AGENCY me contacte pour des opportunités de mission. <a href="#" onclick="go('privacy')">Politique de confidentialité</a>.</div>
+              </div>
+              <button class="cnb-btn" onclick="submitNetwork()">Rejoindre le réseau ERE →</button>
+              <div class="cnb-note">Gratuit · Sans engagement · Tu peux te retirer à tout moment</div>
+            </div>
+            <div class="cnb-success" id="cnb-success">
+              <div class="cnb-success-ico">🤝</div>
+              <div class="cnb-success-title">Bienvenue dans le réseau !</div>
+              <div class="cnb-success-sub">On reviendra vers toi dès qu'une mission correspond à ton profil. En attendant, continue à affiner ton positionnement tarifaire.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Expert — sobre, pas de dark card qui écrase -->
+      <div class="res-cta a a7" style="margin-top:16px">
+        <div class="res-cta-tag">Besoin d'un avis humain ?</div>
+        <h2>30 minutes avec Elias,<br>gratuitement</h2>
+        <p>Fondateur d'ERE AGENCY, Elias peut analyser ton positionnement et te donner des axes concrets pour augmenter tes revenus freelance.</p>
+        <a class="btn-primary" href="https://ere-agency.fr" target="_blank">Réserver mon audit gratuit →</a>
+      </div>
+
+      <div class="res-restart">
+        <button class="btn-ghost" onclick="restart()">← Refaire une estimation</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Pages légales -->
+<div id="page-mentions" class="page">
+  <nav class="nav"><a class="nav-logo" href="#" onclick="go('landing')">ere<span class="nav-logo-dot"></span></a><div class="nav-right"><button class="nav-btn outline" onclick="go('landing')">← Retour</button></div></nav>
+  <div class="legal-shell"><div class="legal-body"><h1 class="legal-title">Mentions légales</h1><p class="legal-p"><strong>Éditeur :</strong> ERE AGENCY — Elias Rollier · <a href="https://ere-agency.fr" style="color:var(--green-ink)">ere-agency.fr</a> · contact@ere-agency.fr</p><p class="legal-p"><strong>Hébergement :</strong> Vercel Inc., 340 Pine Street Suite 701, San Francisco CA 94104, USA</p></div></div>
+</div>
+<div id="page-privacy" class="page">
+  <nav class="nav"><a class="nav-logo" href="#" onclick="go('landing')">ere<span class="nav-logo-dot"></span></a><div class="nav-right"><button class="nav-btn outline" onclick="go('landing')">← Retour</button></div></nav>
+  <div class="legal-shell"><div class="legal-body"><h1 class="legal-title">Politique de confidentialité</h1><p class="legal-p"><strong>Données collectées :</strong> email, prénom, service choisi, réponses au formulaire.</p><p class="legal-p"><strong>Finalité :</strong> envoi du résultat, mise en relation pour missions freelance (avec consentement explicite), amélioration de l'outil.</p><p class="legal-p"><strong>Conservation :</strong> 3 ans. <strong>Base légale :</strong> consentement (RGPD 6.1.a). <strong>Droits :</strong> contact@ere-agency.fr</p></div></div>
+</div>
+
+<script>
+/* ================================================================
+   PRICING ENGINE
+================================================================ */
+const P={
+  base:{debutant:32,intermediaire:55,avance:90,expert:145},
+  exp:{'0':.85,'<1':.90,'1-2':1,'3-5':1.10,'5+':1.20},
+  geo:{paris:1.18,lyon:1.06,bordeaux:1.04,marseille:1.02,toulouse:1.03,nantes:1.04},
+  urg:{'<7j':1.25,'7-14j':1.10,'>14j':1},
+  sz:{solo:.88,tpe:.95,pme:1.05,eti:1.15,grand_compte:1.28},
+  cmp:{1:.85,2:.95,3:1,4:1.18,5:1.35},
+  rev:{'1':1.05,'2':1.10,'3':1.15,illimite:1.22},
+  str:{execution_only:1,strategy_execution:1.28},
+  pos:{'low-cost':.78,standard:1,premium:1.28},
+  sec:{ecommerce:1.05,saas:1.10,immobilier:1.08,sante:1.12,finance:1.15,b2b_services:1.05,startup:.95,association:.80},
+  hrs:{ads:25,site_web:30,seo:18,social_media:25,design:40,email_crm:25,copywriting:10,automation:20,tracking:15,autre:20},
+  buf:1.12,rMin:.82,rMax:1.22
+}
+function pct(a,b){return b?Math.round((1-b/a)*100):Math.round((a-1)*100)}
+function fmt(n){return Math.round(n).toLocaleString('fr-FR')}
+function calcPrice(d){
+  const fUp=[],fDn=[],mults=[]
+  let rate=P.base[d.level||'debutant']||32
+  const eM=P.exp[d.experienceYears]||1
+  if(eM>1)fUp.push(`Expérience solide — tu peux facturer plus (+${pct(eM)}%)`)
+  if(eM<1)fDn.push(`Peu d'expérience — c'est normal pour commencer (-${pct(1,eM)}%)`)
+  rate*=eM
+  const city=(d.geoCity||'').toLowerCase();let gM=1
+  for(const[k,v] of Object.entries(P.geo))if(city.includes(k)){gM=v;break}
+  if(gM>1)fUp.push(`${d.geoCity} — zone géographique à forte valeur marchande`)
+  rate*=gM
+  if(d.clientTypeGeo==='international'){rate*=1.15;fUp.push('Clientèle internationale (+15%)')}
+  const hrs=(d.estimatedHours&&d.estimatedHours>0)?+d.estimatedHours:(P.hrs[d.serviceCategory]||20)
+  let tot=1
+  const uM=P.urg[d.urgency]||1
+  if(uM>1){fUp.push(`Délai urgent (${d.urgency}) — prime de vitesse +${pct(uM)}%`);mults.push({l:`Urgence (${d.urgency})`,v:uM,up:1})}
+  tot*=uM
+  const sM=P.sz[d.clientSize]||1
+  if(sM>1)fUp.push(`Client ${d.clientSize} — process et interlocuteurs = plus de valeur perçue`)
+  if(sM<1)fDn.push(`Client solo/TPE — budgets généralement plus contraints (-${pct(1,sM)}%)`)
+  mults.push({l:`Taille client (${d.clientSize})`,v:sM,up:sM>=1});tot*=sM
+  const cM=P.cmp[d.complexity]||1
+  if(cM>1)fUp.push(`Complexité élevée (${d.complexity}/5) — risque et réflexion accrus`)
+  if(cM<1)fDn.push(`Projet simple (${d.complexity}/5) — moins de charge mentale`)
+  mults.push({l:`Complexité ${d.complexity}/5`,v:cM,up:cM>=1});tot*=cM
+  const rM=P.rev[d.numRevisions]||1.10
+  if(rM>1.05){fUp.push(`${d.numRevisions} retours inclus — buffer allers-retours ajouté`);mults.push({l:`Retours (${d.numRevisions})`,v:rM,up:1})}
+  tot*=rM
+  const stM=P.str[d.propositionType]||1
+  if(stM>1){fUp.push(`Stratégie incluse — tu apportes le cerveau, pas juste les mains (+${pct(stM)}%)`);mults.push({l:'Stratégie incluse',v:stM,up:1})}
+  tot*=stM
+  const pM=P.pos[d.positioning]||1
+  if(pM>1){fUp.push(`Positionnement premium — assume-le`);mults.push({l:'Premium',v:pM,up:1})}
+  if(pM<1){fDn.push(`Positionnement low-cost — utile pour les premières missions`);mults.push({l:'Low-cost',v:pM,up:0})}
+  tot*=pM
+  const seM=P.sec[d.clientSector]||1
+  if(seM>1){fUp.push(`Secteur ${d.clientSector} — forte valeur`);mults.push({l:`Secteur ${d.clientSector}`,v:seM,up:1})}
+  if(seM<1){fDn.push(`Secteur ${d.clientSector} — budgets plus contraints`);mults.push({l:`Secteur ${d.clientSector}`,v:seM,up:0})}
+  tot*=seM
+  if(d.beginnerPack==='true'||d.beginnerPack===true){tot*=.85;fDn.push('Pack débutant appliqué (-15%) — stratégie court terme');mults.push({l:'Pack débutant',v:.85,up:0})}
+  if(!d.hasPortfolio||d.hasPortfolio==='false'){tot*=.92;fDn.push('Portfolio absent — confiance plus difficile à établir (-8%)');mults.push({l:'Pas de portfolio',v:.92,up:0})}
+  const subtotal=Math.round(rate*hrs)
+  const rec=Math.round(subtotal*tot*P.buf)
+  const mn=Math.round(rec*P.rMin),mx=Math.round(rec*P.rMax)
+  const hly=Math.round(rec/hrs)
+  let struct='Forfait',sReas='Le forfait est la structure reine : tu es payé pour la valeur livrée, pas le temps. Ça protège ta marge si tu travailles plus vite que prévu.',sIco='📋'
+  if(d.collaborationMode==='retainer'){struct='Retainer';sReas='Collaboration mensuelle récurrente = retainer. Tu sécurises ton revenu, le client sécurise ta dispo.';sIco='📅'}
+  else if(hrs<10){struct='Tarif horaire';sReas='Mission courte et périmètre flou : le tarif horaire reste la solution la plus protectrice.';sIco='⏱️'}
+  const opts=[]
+  if(d.serviceCategory==='ads'){opts.push({l:'Dashboard reporting live',p:Math.round(hly*4),d:'Looker Studio actualisé en temps réel'});if(d.adsCreatives==='freelance')opts.push({l:'Pack créas (5 visuels + 2 vidéos)',p:Math.round(hly*8),d:'Production des assets pour les campagnes'})}
+  if(d.serviceCategory==='site_web'&&(d.siteMaintenance==='true'||d.siteMaintenance===true))opts.push({l:'Maintenance mensuelle',p:Math.round(hly*3),d:'MAJ, sécurité, petites modifications (3h/mois)'})
+  if(d.serviceCategory==='seo')opts.push({l:'Rapport mensuel détaillé',p:Math.round(hly*2),d:'Positions, trafic, leads générés'})
+  if(d.collaborationMode==='retainer')opts.push({l:'Engagement 3 mois (-10%)',p:-Math.round(rec*.10),d:'Fidélité récompensée'})
+  return{rec,mn,mx,hly,hlyMn:Math.round(mn/hrs),hlyMx:Math.round(mx/hrs),hrs,rate:Math.round(rate),subtotal,mults,fUp,fDn,opts,struct,sReas,sIco}
+}
+
+/* ================================================================
+   ÉTAT GLOBAL
+================================================================ */
+let fd={},step=0,capturedEmail=false,exitShown=false,floatBarShown=false
+const TOTAL=6 // 6 étapes (on a supprimé l'étape email du formulaire)
+const STEPS=[
+  {id:'A',label:'Profil',title:'Parle-moi de toi',desc:'Honnêteté = meilleure estimation. 2 minutes chrono.'},
+  {id:'B',label:'Marché',title:'Ton marché & contexte',desc:'Qui sont tes clients ? Dans quelle zone tu travailles ?'},
+  {id:'C',label:'Service',title:'Quel service tu proposes ?',desc:'Choisis la catégorie principale — les questions suivantes s\'adapteront.'},
+  {id:'D',label:'Détails',title:'Détails du service',desc:'Plus on en sait sur ta mission, plus l\'estimation est précise.'},
+  {id:'E',label:'Charge',title:'Temps & complexité',desc:'Évalue la charge de travail. Reste honnête, l\'estimation est pour toi.'},
+  {id:'F',label:'Valeur',title:'Valeur & conditions',desc:'Ce que tu inclus dans ta prestation influe directement sur le prix.'},
+]
+
+/* ================================================================
+   PAGE ROUTER
+================================================================ */
+const PAGES=['landing','estimateur','resultat','mentions','privacy']
+function go(p){
+  PAGES.forEach(id=>{const el=document.getElementById('page-'+id);if(el)el.className='page'+(id===p?' active':'')})
+  if(p==='estimateur')renderStep()
+  if(p==='resultat'){initExitIntent();initFloatBar()}
+  window.scrollTo(0,0)
+}
+function faq(btn){btn.closest('.faq-item').classList.toggle('open')}
+
+/* ================================================================
+   FORM HELPERS
+================================================================ */
+function sF(n,v){fd[n]=v;save();if(n==='hasPortfolio'){const e=document.getElementById('fp');if(e)e.style.display=v==='true'?'':'none'}if(n==='serviceCategory'&&v==='autre'){const e=document.getElementById('fa');if(e)e.style.display=''}}
+function sCb(n,v,c){if(!fd[n])fd[n]=[];if(c){if(!fd[n].includes(v))fd[n].push(v)}else fd[n]=fd[n].filter(x=>x!==v);save()}
+function slid(el,id){const m={'sl-hrs':v=>`${v}h / semaine`,'sl-risk':v=>`Niveau ${v} / 5`,'sl-cmp':v=>`Complexité ${v} / 5`,'sl-posts':v=>`${v} posts / semaine`};const e=document.getElementById(id);if(e)e.textContent=(m[id]||(_=>_))(el.value);fd[el.name]=+el.value;save()}
+function save(){try{localStorage.setItem('ere_est',JSON.stringify(fd))}catch(_){}}
+function load(){try{const s=localStorage.getItem('ere_est');if(s)fd=JSON.parse(s)}catch(_){fd={}}}
+function restart(){fd={};step=0;capturedEmail=false;exitShown=false;floatBarShown=false;dismissFloatBar();try{localStorage.removeItem('ere_est')}catch(_){}go('estimateur')}
+function saveFields(){
+  document.querySelectorAll('#est-card [name]').forEach(el=>{if(el.type==='radio'||el.type==='checkbox')return;if(el.value!=='')fd[el.name]=el.type==='number'?+el.value:el.value})
+  save()
+}
+
+function rc(n,v,em,lb){const chk=(fd[n]==v)?'checked':'';return `<label class="rc"><input type="radio" name="${n}" value="${v}" ${chk} onchange="sF('${n}','${v}')"><div class="rc-inner"><span class="em">${em}</span><span>${lb}</span></div></label>`}
+function cb(n,v,lb){const arr=fd[n]||[];const chk=arr.includes(v)?'checked':'';return `<label class="cb"><input type="checkbox" name="${n}" value="${v}" ${chk} onchange="sCb('${n}','${v}',this.checked)"><div class="cb-inner"><div class="cb-mark"></div><span>${lb}</span></div></label>`}
+
+/* ================================================================
+   RENDER BREADCRUMB + PROGRESS
+================================================================ */
+function renderBreadcrumb(){
+  const bc=document.getElementById('breadcrumb');if(!bc)return
+  bc.innerHTML=STEPS.map((s,i)=>{const cls=i<step?'done':i===step?'active':'';const sep=i<STEPS.length-1?'<div class="est-crumb-sep"></div>':'';return `<div class="est-crumb ${cls}"><div class="est-crumb-num">${i<step?'✓':(i+1)}</div><span>${s.label}</span></div>${sep}`}).join('')
+  const pct=Math.round(((step+1)/TOTAL)*100)
+  const pf=document.getElementById('prog-fill');if(pf)pf.style.width=pct+'%'
+  const sc=document.getElementById('est-step-counter');if(sc)sc.textContent=`${step+1} / ${TOTAL}`
+}
+function renderStep(){
+  renderBreadcrumb()
+  const s=STEPS[step]
+  document.getElementById('est-card').innerHTML=`
+    <div class="est-step-tag">Étape ${s.id}</div>
+    <div class="est-card-title">${s.title}</div>
+    <div class="est-card-desc">${s.desc}</div>
+    <div id="fields">${buildStep(step)}</div>
+    <div class="est-nav-form">
+      ${step>0?`<button class="btn-back" onclick="prev()">← Retour</button>`:'<div></div>'}
+      <button class="btn-next" onclick="next()">${step===TOTAL-1?'Voir mon estimation →':'Continuer →'}</button>
+    </div>`
+  document.querySelectorAll('#fields [name]').forEach(el=>{if(el.type==='radio'||el.type==='checkbox')return;if(fd[el.name]!==undefined)el.value=fd[el.name];if(el.type==='range'){const m={hoursPerWeek:'sl-hrs',riskLevel:'sl-risk',complexity:'sl-cmp',socialPostsPerWeek:'sl-posts'};if(m[el.name])slid(el,m[el.name])}})
+  const fp=document.getElementById('fp');if(fp)fp.style.display=(fd.hasPortfolio==='true')?'':'none'
+}
+
+/* ================================================================
+   BUILD STEPS
+================================================================ */
+function buildStep(i){
+  if(i===0)return `
+    <div class="f f-row"><div><label>Prénom <span class="opt">(optionnel)</span></label><input type="text" name="firstName" placeholder="Elias"></div><div><label>Nom <span class="opt">(optionnel)</span></label><input type="text" name="lastName" placeholder="Rollier"></div></div>
+    <div class="f"><label>Statut actuel</label><div class="rc-grid">${rc('status','etudiant','🎓','Étudiant')}${rc('status','alternant','🔄','Alternant')}${rc('status','salarie','💼','Salarié')}${rc('status','freelance','🚀','Freelance')}${rc('status','side','🌙','Side-project')}</div></div>
+    <div class="f"><label>Expérience en marketing digital</label><div class="rc-grid">${rc('experienceYears','0','🌱','0 an')}${rc('experienceYears','<1','📗','< 1 an')}${rc('experienceYears','1-2','📘','1-2 ans')}${rc('experienceYears','3-5','📙','3-5 ans')}${rc('experienceYears','5+','⭐','5 ans +')}</div></div>
+    <div class="f"><label>Ton niveau</label><div class="rc-grid">${rc('level','debutant','🐣','Débutant')}${rc('level','intermediaire','🐥','Intermédiaire')}${rc('level','avance','🦅','Avancé')}${rc('level','expert','🦁','Expert')}</div></div>
+    <div class="f"><label>Tu as un portfolio ?</label><div class="rc-grid" style="grid-template-columns:1fr 1fr">${rc('hasPortfolio','true','✅','Oui')}${rc('hasPortfolio','false','❌','Pas encore')}</div></div>
+    <div class="f" id="fp" style="display:none"><label>Lien portfolio <span class="opt">(optionnel)</span></label><input type="url" name="portfolioUrl" placeholder="https://monportfolio.fr"></div>
+    <div class="f"><label>Disponibilité</label><input type="range" name="hoursPerWeek" min="1" max="60" value="${fd.hoursPerWeek||20}" oninput="slid(this,'sl-hrs')"><div class="slider-val" id="sl-hrs">${fd.hoursPerWeek||20}h / semaine</div></div>
+    <div class="f"><label>Objectif principal</label><div class="rc-grid">${rc('objective','revenus','💰','Max revenus')}${rc('objective','references','🏆','Gagner des réfs')}${rc('objective','equilibre','⚖️','Équilibre')}</div></div>`
+  if(i===1)return `
+    <div class="f f-row"><div><label>Pays</label><select name="geoCountry"><option value="">— Choisir —</option><option value="france">🇫🇷 France</option><option value="belgique">🇧🇪 Belgique</option><option value="suisse">🇨🇭 Suisse</option><option value="canada">🇨🇦 Canada</option><option value="uk">🇬🇧 Royaume-Uni</option><option value="usa">🇺🇸 USA</option><option value="autre">🌍 Autre</option></select></div><div><label>Ville</label><input type="text" name="geoCity" placeholder="Paris, Lyon…"></div></div>
+    <div class="f"><label>Type de clientèle</label><div class="rc-grid">${rc('clientTypeGeo','local','📍','Locale')}${rc('clientTypeGeo','national','🗺️','Nationale')}${rc('clientTypeGeo','international','🌍','Internationale')}</div></div>
+    <div class="f"><label>Secteur du client</label><select name="clientSector"><option value="">— Choisir —</option><option value="ecommerce">E-commerce</option><option value="saas">SaaS / Tech</option><option value="immobilier">Immobilier</option><option value="sante">Santé</option><option value="finance">Finance</option><option value="b2b_services">Services B2B</option><option value="startup">Startup</option><option value="association">Association</option><option value="restauration">Restauration</option><option value="mode">Mode / Luxe</option><option value="autre">Autre</option></select></div>
+    <div class="f"><label>Taille du client</label><div class="rc-grid">${rc('clientSize','solo','👤','Solo')}${rc('clientSize','tpe','🏠','TPE < 10')}${rc('clientSize','pme','🏢','PME 10-250')}${rc('clientSize','eti','🏬','ETI 250+')}${rc('clientSize','grand_compte','🏭','Grand compte')}</div></div>
+    <div class="f"><label>Urgence</label><div class="rc-grid">${rc('urgency','<7j','🔥','< 7 jours')}${rc('urgency','7-14j','⚡','7-14 jours')}${rc('urgency','>14j','🌿','> 14 jours')}</div></div>
+    <div class="f"><label>Mode de collaboration</label><div class="rc-grid">${rc('collaborationMode','one-shot','1️⃣','One-shot')}${rc('collaborationMode','recurrent','🔁','Récurrent')}${rc('collaborationMode','retainer','📅','Retainer mensuel')}</div></div>
+    <div class="f"><label>Positionnement</label><div class="rc-grid">${rc('positioning','low-cost','💸','Low-cost')}${rc('positioning','standard','🎯','Standard')}${rc('positioning','premium','💎','Premium')}</div></div>
+    <div class="f"><label>Complexité du client<span class="hint">Process longs, interlocuteurs multiples, paiement incertain…</span></label><input type="range" name="riskLevel" min="1" max="5" value="${fd.riskLevel||2}" oninput="slid(this,'sl-risk')"><div class="slider-val" id="sl-risk">Niveau ${fd.riskLevel||2} / 5</div></div>`
+  if(i===2){const svcs=[{v:'ads',e:'📱',l:'Publicité Ads',s:'Meta, Google, TikTok'},{v:'site_web',e:'🌐',l:'Site web',s:'Vitrine, landing, e-com'},{v:'seo',e:'🔍',l:'SEO',s:'Audit, contenu, tech'},{v:'social_media',e:'📣',l:'Social Media',s:'Contenu, community'},{v:'design',e:'🎨',l:'Design / UI-UX',s:'Branding, interfaces'},{v:'email_crm',e:'📧',l:'Email / CRM',s:'Funnels, newsletters'},{v:'copywriting',e:'✍️',l:'Copywriting',s:'Pages, emails, ads'},{v:'automation',e:'⚙️',l:'Automation',s:'No-code, workflows'},{v:'tracking',e:'📊',l:'Tracking / GA4',s:'Analytics, GTM'},{v:'autre',e:'➕',l:'Autre',s:'Décrire ci-dessous'}]
+    return `<div class="f"><label>Service principal</label><div class="rc-grid" style="grid-template-columns:repeat(auto-fill,minmax(148px,1fr))">${svcs.map(s=>`<label class="rc"><input type="radio" name="serviceCategory" value="${s.v}" ${fd.serviceCategory===s.v?'checked':''} onchange="sF('serviceCategory','${s.v}')"><div class="rc-inner"><span class="em">${s.e}</span><strong style="font-size:12px;letter-spacing:-.01em">${s.l}</strong><span style="font-size:11px;color:var(--text-4)">${s.s}</span></div></label>`).join('')}</div></div><div class="f" id="fa" style="display:${fd.serviceCategory==='autre'?'':'none'}"><label>Décris ton service</label><input type="text" name="autreService" placeholder="Ex: formation, conseil…"></div>`
+  }
+  if(i===3){const svc=fd.serviceCategory||'ads'
+    if(svc==='ads')return `<div class="f"><label>Plateformes</label><div class="cb-grid">${cb('adsPlatforms','meta','📘 Meta')}${cb('adsPlatforms','google','🔍 Google')}${cb('adsPlatforms','tiktok','🎵 TikTok')}${cb('adsPlatforms','linkedin','💼 LinkedIn')}${cb('adsPlatforms','youtube','▶️ YouTube')}</div></div><div class="f"><label>Objectif</label><div class="rc-grid">${rc('adsObjective','leads','🎯','Leads')}${rc('adsObjective','ventes','💰','Ventes')}${rc('adsObjective','trafic','🚦','Trafic')}${rc('adsObjective','notoriete','📢','Notoriété')}</div></div><div class="f"><label>Budget média / mois</label><div class="rc-grid">${rc('adsBudget','<500','🌱','< 500€')}${rc('adsBudget','500-2k','📈','500-2k€')}${rc('adsBudget','2k-5k','💪','2k-5k€')}${rc('adsBudget','5k+','🚀','5k€ +')}</div></div><div class="f"><label>Setup technique</label><div class="cb-grid">${cb('adsSetupItems','pixel','🔵 Pixel')}${cb('adsSetupItems','events','📡 Events')}${cb('adsSetupItems','capi','🔐 Conv. API')}${cb('adsSetupItems','catalog','🛒 Catalogue')}</div></div><div class="f"><label>Créas</label><div class="rc-grid">${rc('adsCreatives','client','📁','Client fournit')}${rc('adsCreatives','freelance','🎨','Je les crée')}${rc('adsCreatives','mix','🤝','Mix')}</div></div><div class="f"><label>Reporting</label><div class="rc-grid">${rc('adsReporting','basique','📝','Mensuel')}${rc('adsReporting','hebdo','📅','Hebdo')}${rc('adsReporting','dashboard','📊','Dashboard live')}</div></div>`
+    if(svc==='site_web')return `<div class="f"><label>Type</label><div class="rc-grid">${rc('siteType','landing','🎯','Landing')}${rc('siteType','vitrine_small','🏠','Vitrine 1-5p')}${rc('siteType','vitrine_large','🏢','Vitrine 6-12p')}${rc('siteType','ecommerce','🛒','E-commerce')}</div></div><div class="f"><label>Technologie</label><div class="rc-grid">${rc('siteTech','webflow','🌊','Webflow')}${rc('siteTech','wordpress','📰','WordPress')}${rc('siteTech','shopify','🟢','Shopify')}${rc('siteTech','nextjs','⬛','Next.js')}${rc('siteTech','autre','🔧','Autre')}</div></div><div class="f"><label>Niveau design</label><div class="rc-grid">${rc('siteDesign','template','📋','Template')}${rc('siteDesign','semi_custom','🖌️','Semi-custom')}${rc('siteDesign','sur_mesure','✨','Sur-mesure')}</div></div><div class="f"><label>Contenu</label><div class="rc-grid">${rc('siteContent','fourni','📦','Fourni client')}${rc('siteContent','a_rediger','✍️','À rédiger')}${rc('siteContent','mix','🤝','Mix')}</div></div><div class="f"><label>Maintenance incluse ?</label><div class="rc-grid" style="grid-template-columns:1fr 1fr">${rc('siteMaintenance','true','✅','Oui')}${rc('siteMaintenance','false','❌','Non')}</div></div>`
+    if(svc==='seo')return `<div class="f"><label>Type SEO</label><div class="cb-grid">${cb('seoType','audit','🔍 Audit')}${cb('seoType','roadmap','🗺️ Roadmap')}${cb('seoType','contenu','✍️ Contenu')}${cb('seoType','technique','⚙️ Technique')}${cb('seoType','netlinking','🔗 Netlinking')}</div></div><div class="f"><label>Niveau concurrentiel</label><div class="rc-grid">${rc('seoCompetitiveLevel','faible','🌱','Faible')}${rc('seoCompetitiveLevel','moyen','⚡','Moyen')}${rc('seoCompetitiveLevel','fort','🔥','Fort')}</div></div><div class="f"><label>Articles / mois</label><input type="number" name="seoArticlesPerMonth" placeholder="Ex: 4" min="0" max="100"></div>`
+    if(svc==='social_media')return `<div class="f"><label>Plateformes</label><div class="cb-grid">${cb('socialPlatforms','instagram','📸 Instagram')}${cb('socialPlatforms','facebook','📘 Facebook')}${cb('socialPlatforms','tiktok','🎵 TikTok')}${cb('socialPlatforms','linkedin','💼 LinkedIn')}${cb('socialPlatforms','x','🐦 X')}${cb('socialPlatforms','youtube','▶️ YouTube')}</div></div><div class="f"><label>Posts / semaine</label><input type="range" name="socialPostsPerWeek" min="1" max="14" value="${fd.socialPostsPerWeek||5}" oninput="slid(this,'sl-posts')"><div class="slider-val" id="sl-posts">${fd.socialPostsPerWeek||5} posts / semaine</div></div><div class="f"><label>Reels / mois</label><input type="number" name="socialReelsPerMonth" placeholder="Ex: 4" min="0" max="60"></div><div class="f"><label>Gestion DM ?</label><div class="rc-grid" style="grid-template-columns:1fr 1fr">${rc('socialDmModeration','true','✅','Oui')}${rc('socialDmModeration','false','❌','Non')}</div></div>`
+    return `<div class="f"><label>Décris ta prestation</label><textarea name="serviceDescriptionDetail" rows="4" placeholder="Ex: audit + refonte identité visuelle, livraison 3 semaines…"></textarea></div><div class="f"><label>Nombre de livrables</label><input type="number" name="numDeliverables" placeholder="Ex: 3" min="1" max="100"></div>`
+  }
+  if(i===4)return `
+    <div class="f"><label>Temps estimé (h)<span class="hint">0 = calcul automatique selon ton service</span></label><input type="number" name="estimatedHours" placeholder="0 = auto" min="0" max="2000"></div>
+    <div class="f"><label>Complexité</label><input type="range" name="complexity" min="1" max="5" value="${fd.complexity||3}" oninput="slid(this,'sl-cmp')"><div class="slider-val" id="sl-cmp">Complexité ${fd.complexity||3} / 5</div></div>
+    <div class="f"><label>Allers-retours inclus</label><div class="rc-grid">${rc('numRevisions','1','1️⃣','1')}${rc('numRevisions','2','2️⃣','2')}${rc('numRevisions','3','3️⃣','3')}${rc('numRevisions','illimite','♾️','Illimités')}</div></div>
+    <div class="f"><label>Réunions incluses</label><div class="rc-grid">${rc('numMeetings','0','🚫','Aucune')}${rc('numMeetings','1','1️⃣','1')}${rc('numMeetings','hebdo','📅','Hebdomadaires')}</div></div>`
+  if(i===5)return `
+    <div class="f"><label>Ce que tu proposes<span class="hint">Stratégie incluse = tu peux facturer davantage</span></label><div class="rc-grid" style="grid-template-columns:1fr 1fr">${rc('propositionType','execution_only','⚙️','Exécution')}${rc('propositionType','strategy_execution','🧠','Stratégie + Exéc.')}</div></div>
+    <div class="f"><label>Cession de droits</label><div class="rc-grid">${rc('rightsCession','none','🚫','Aucune')}${rc('rightsCession','standard','📋','Usage limité')}${rc('rightsCession','full','📜','Cession totale')}</div></div>
+    <div class="f"><label>Conditions de paiement</label><div class="rc-grid">${rc('paymentTerms','100','💯','100% livraison')}${rc('paymentTerms','50-50','✌️','50% / 50%')}${rc('paymentTerms','30-40-30','📊','30/40/30')}</div></div>
+    <div class="f"><label>Pack débutant ?<span class="hint">-15% pour décrocher tes premières références</span></label><div class="rc-grid" style="grid-template-columns:1fr 1fr">${rc('beginnerPack','true','🌱','Oui, -15%')}${rc('beginnerPack','false','💪','Tarif plein')}</div></div>`
+  return ''
+}
+
+/* ================================================================
+   NAVIGATION
+================================================================ */
+function next(){saveFields();if(step===TOTAL-1){submit();return}step++;renderStep();window.scrollTo(0,0)}
+function prev(){if(step>0){step--;renderStep();window.scrollTo(0,0)}}
+
+/* ================================================================
+   SUBMIT — calcul direct, plus d'étape email bloquante
+================================================================ */
+async function submit(){
+  saveFields()
+  document.getElementById('loader').classList.add('on')
+  await new Promise(r=>setTimeout(r,1200))
+  const res=calcPrice(fd)
+  document.getElementById('loader').classList.remove('on')
+  // Pré-remplir les champs capture avec données du formulaire si dispo
+  if(fd.email){
+    const ci=document.getElementById('cap-email-input');if(ci)ci.value=fd.email
+    const ei=document.getElementById('exit-email');if(ei)ei.value=fd.email
+  }
+  if(fd.serviceCategory){
+    const cs=document.getElementById('cnb-service');if(cs)cs.value=fd.serviceCategory
+  }
+  if(fd.firstName){
+    const cn=document.getElementById('cnb-name');if(cn)cn.value=fd.firstName
+  }
+  renderResult(res)
+  go('resultat')
+}
+
+/* ================================================================
+   RENDER RESULT
+================================================================ */
+function renderResult(r){
+  const name=fd.firstName?`, ${fd.firstName}`:''
+  document.getElementById('res-h1').textContent=`Ton estimation${name} 👇`
+  document.getElementById('r-price').textContent=fmt(r.rec)+' €'
+  document.getElementById('r-range').innerHTML=`Fourchette : <strong>${fmt(r.mn)} €</strong> — <strong>${fmt(r.mx)} €</strong>`
+  const tags=[fd.serviceCategory,fd.level,fd.geoCity||'France',fd.positioning].filter(Boolean)
+  document.getElementById('r-tags').innerHTML=[...tags.map(t=>`<span class="res-tag">${t}</span>`),`<span class="res-tag g">${r.struct}</span>`].join('')
+  document.getElementById('r-hourly').textContent=r.hly+' €/h'
+  document.getElementById('r-hourly-range').textContent=`${r.hlyMn} — ${r.hlyMx} €/h`
+  document.getElementById('r-hours').textContent=r.hrs+'h'
+  document.getElementById('r-struct').textContent=r.struct
+  document.getElementById('r-struct-ico').textContent=r.sIco
+  document.getElementById('r-struct-title').textContent=r.struct+' recommandé'
+  document.getElementById('r-struct-desc').textContent=r.sReas
+  const upEl=document.getElementById('r-up');if(r.fUp.length)upEl.innerHTML=r.fUp.map(f=>`<div class="factor up"><span class="factor-ico">↗</span>${f}</div>`).join('');else document.getElementById('sec-up').style.display='none'
+  const dnEl=document.getElementById('r-dn');if(r.fDn.length)dnEl.innerHTML=r.fDn.map(f=>`<div class="factor dn"><span class="factor-ico">↘</span>${f}</div>`).join('');else document.getElementById('sec-dn').style.display='none'
+  const rows=[{l:'Taux horaire de base',v:`${r.rate} €/h`},{l:'Heures estimées',v:`${r.hrs}h`},{l:'Sous-total',v:`${fmt(r.subtotal)} €`},...r.mults.map(m=>({l:m.l,v:`× ${m.v.toFixed(2)}`,pill:true,up:m.up})),{l:'Buffer imprévus (+12%)',v:'× 1.12',pill:true,up:1},{l:'TOTAL RECOMMANDÉ',v:`${fmt(r.rec)} €`,total:true}]
+  document.getElementById('r-breakdown').innerHTML=rows.map(row=>`<div class="bd ${row.total?'total':''}"><span class="bd-l">${row.l}</span><span class="bd-r">${row.pill?`<span class="bd-pill ${row.up?'up':'dn'}">${row.v}</span>`:row.v}</span></div>`).join('')
+  const optsEl=document.getElementById('r-opts');if(r.opts?.length){optsEl.innerHTML=r.opts.map(o=>`<div class="option"><div><div class="option-name">${o.l}</div><div class="option-desc">${o.d}</div></div><div class="option-price">${o.p>0?'+':''}${fmt(o.p)} €</div></div>`).join('')}else document.getElementById('sec-opts').style.display='none'
+  // Sync exit modal price
+  const ep=document.getElementById('exit-price-preview');if(ep)ep.textContent=fmt(r.rec)+' €'
+  // Sync float bar
+  const fb=document.getElementById('float-bar-email');if(fb&&fd.email)fb.value=fd.email
+}
+
+/* ================================================================
+   TRIGGER 1 — Capture email inline
+================================================================ */
+function submitCapEmail(){
+  const input=document.getElementById('cap-email-input')
+  const email=input?.value?.trim()
+  if(!email||!email.includes('@')){if(input)input.style.borderColor='#D93025';return}
+  capturedEmail=true
+  captureContact({email,source:'inline_result',service:fd.serviceCategory,firstName:fd.firstName})
+  document.getElementById('cap-email-form').style.display='none'
+  document.getElementById('cap-email-success').style.display='block'
+  // Sync autres champs
+  const ei=document.getElementById('exit-email');if(ei)ei.value=email
+  const fbi=document.getElementById('float-bar-email');if(fbi)fbi.value=email
+  dismissFloatBar()
+}
+
+/* ================================================================
+   TRIGGER 2 — Réseau freelances
+================================================================ */
+function submitNetwork(){
+  const email=document.getElementById('cnb-email')?.value?.trim()
+  const name=document.getElementById('cnb-name')?.value?.trim()
+  const service=document.getElementById('cnb-service')?.value
+  const consent=document.getElementById('cnb-consent')?.checked
+  if(!email||!email.includes('@')){const el=document.getElementById('cnb-email');if(el)el.style.borderColor='rgba(255,80,80,.5)';return}
+  if(!consent){const el=document.getElementById('cnb-consent');if(el)el.style.outline='2px solid rgba(255,80,80,.5)';return}
+  capturedEmail=true
+  captureContact({email,firstName:name,service,source:'network_join',level:fd.level,city:fd.geoCity,consentMarketing:true})
+  document.getElementById('cnb-form').style.display='none'
+  document.getElementById('cnb-success').style.display='block'
+  dismissFloatBar()
+  dismissExit()
+}
+
+/* ================================================================
+   TRIGGER 3 — Exit intent
+================================================================ */
+let exitEnabled=false
+function initExitIntent(){
+  exitEnabled=true
+  document.addEventListener('mouseleave',handleMouseLeave)
+}
+function handleMouseLeave(e){
+  if(!exitEnabled||exitShown||capturedEmail)return
+  if(e.clientY<=10){exitShown=true;document.getElementById('exit-overlay').classList.add('on')}}
+function closeExit(e){if(e.target===document.getElementById('exit-overlay'))dismissExit()}
+function dismissExit(){document.getElementById('exit-overlay').classList.remove('on');exitEnabled=false;document.removeEventListener('mouseleave',handleMouseLeave)}
+function submitExit(){
+  const email=document.getElementById('exit-email')?.value?.trim()
+  if(!email||!email.includes('@')){const el=document.getElementById('exit-email');if(el)el.style.borderColor='#D93025';return}
+  capturedEmail=true
+  captureContact({email,source:'exit_intent',service:fd.serviceCategory,firstName:fd.firstName})
+  document.getElementById('exit-form').style.display='none'
+  document.getElementById('exit-success').style.display='block'
+  setTimeout(()=>dismissExit(),2800)
+}
+
+/* ================================================================
+   FLOATING BAR — Après 30s sur la page résultat
+================================================================ */
+let floatBarTimer=null
+function initFloatBar(){
+  if(floatBarShown||capturedEmail)return
+  floatBarTimer=setTimeout(()=>{
+    if(!capturedEmail&&!floatBarShown){
+      floatBarShown=true
+      document.getElementById('float-bar').classList.add('show')
+    }
+  },30000)
+}
+function submitFloatBar(){
+  const email=document.getElementById('float-bar-email')?.value?.trim()
+  if(!email||!email.includes('@'))return
+  capturedEmail=true
+  captureContact({email,source:'float_bar',service:fd.serviceCategory,firstName:fd.firstName})
+  const bar=document.getElementById('float-bar')
+  bar.innerHTML=`<span style="font-size:13px;font-weight:700;color:#fff;padding:4px 8px">✅ Estimation envoyée à ${email}</span>`
+  setTimeout(()=>dismissFloatBar(),3000)
+}
+function dismissFloatBar(){
+  const bar=document.getElementById('float-bar');if(bar)bar.classList.remove('show')
+  if(floatBarTimer){clearTimeout(floatBarTimer);floatBarTimer=null}
+}
+
+/* ================================================================
+   CAPTURE CONTACT — envoi vers Airtable / Make / webhook
+   Remplace l'URL par ton webhook Make.com ou Airtable API
+================================================================ */
+async function captureContact(data){
+  const payload={
+    ...data,
+    timestamp:new Date().toISOString(),
+    estimationData:{
+      level:fd.level,
+      service:fd.serviceCategory,
+      city:fd.geoCity,
+      country:fd.geoCountry,
+      positioning:fd.positioning,
+      clientSize:fd.clientSize,
+      collaborationMode:fd.collaborationMode,
+    }
+  }
+  console.log('📬 Contact capturé :', payload)
+  // ↓ Décommente et remplace l'URL par ton webhook Make.com
+  // try{
+  //   await fetch('https://hook.eu1.make.com/TON_WEBHOOK_ID',{
+  //     method:'POST',
+  //     headers:{'Content-Type':'application/json'},
+  //     body:JSON.stringify(payload)
+  //   })
+  // }catch(e){console.warn('Webhook error:',e)}
+}
+
+/* ================================================================
+   INIT
+================================================================ */
+load()
+</script>
+</body>
+</html>
