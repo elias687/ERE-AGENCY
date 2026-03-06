@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calcule ton prix freelance | ERE AGENCY</title>
+<meta name="description" content="Outil gratuit pour calculer ton tarif freelance en marketing digital. Fourchette personnalisee selon ton profil, service et marche.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F4F4F0;
+  --white: #FFFFFF;
+  --s2: #EFEFEB;
+  --s3: #E8E8E4;
+  --b1: #E0E0DA;
+  --b2: #C8C8C0;
+  --green: #3BFF6C;
+  --green2: #20E853;
+  --green3: #17C944;
+  --gink: #0A6E25;
+  --t1: #0A0A0A;
+  --t2: #2E2E2E;
+  --t3: #5C5C5C;
+  --t4: #9A9A9A;
+  --f: 'Plus Jakarta Sans', sans-serif;
+  --rsm: 8px; --rmd: 14px; --rlg: 20px; --rxl: 28px; --r2xl: 40px; --rmax: 9999px;
+  --sh: 0 2px 8px rgba(0,0,0,.06), 0 0 1px rgba(0,0,0,.04);
+  --shm: 0 6px 24px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--f); background: var(--bg); color: var(--t1); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+
+/* ── PAGE ROUTER ── */
+.pg { display: none; }
+.pg.on { display: block; }
+
+/* ── NAV ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  height: 60px; background: rgba(244,244,240,.92);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--b1);
+  display: flex; align-items: center; padding: 0 32px; justify-content: space-between;
+}
+.nav-logo { font-size: 20px; font-weight: 800; letter-spacing: -.05em; color: var(--t1); text-decoration: none; display: flex; align-items: flex-start; }
+.nav-dot { width: 7px; height: 7px; background: var(--green3); border-radius: 50%; margin-top: 3px; margin-left: 1px; display: inline-block; }
+.nav-r { display: flex; align-items: center; gap: 10px; }
+.nav-a { font-size: 13px; font-weight: 600; color: var(--t3); text-decoration: none; padding: 6px 10px; border-radius: var(--rsm); transition: color .15s; }
+.nav-a:hover { color: var(--t1); }
+.nbtn { background: var(--green); color: var(--t1); font-family: var(--f); font-size: 13px; font-weight: 800; padding: 8px 18px; border-radius: var(--rmax); border: none; cursor: pointer; letter-spacing: -.01em; transition: background .15s, transform .12s; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; }
+.nbtn:hover { background: var(--green2); transform: scale(.98); }
+.nbtn.out { background: transparent; border: 1.5px solid var(--b2); color: var(--t2); }
+.nbtn.out:hover { background: var(--s2); }
+
+/* ── BUTTONS ── */
+.btn-k { background: var(--t1); color: #fff; font-family: var(--f); font-size: 14px; font-weight: 800; padding: 13px 26px; border-radius: var(--rmax); border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; letter-spacing: -.01em; transition: background .15s, transform .12s; text-decoration: none; }
+.btn-k:hover { background: #1c1c1c; transform: translateY(-1px); }
+.btn-g { background: var(--green); color: var(--t1); font-family: var(--f); font-size: 14px; font-weight: 800; padding: 13px 26px; border-radius: var(--rmax); border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; letter-spacing: -.01em; transition: background .15s, transform .12s; text-decoration: none; }
+.btn-g:hover { background: var(--green2); transform: translateY(-1px); }
+.btn-o { background: transparent; color: var(--t3); font-family: var(--f); font-size: 14px; font-weight: 600; padding: 13px 22px; border-radius: var(--rmax); border: 1.5px solid var(--b2); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all .15s; text-decoration: none; }
+.btn-o:hover { border-color: var(--t3); color: var(--t1); }
+
+/* ── LANDING ── */
+.hero { padding: 120px 32px 80px; max-width: 1160px; margin: 0 auto; }
+.badge { display: inline-flex; align-items: center; gap: 8px; background: var(--green); color: var(--t1); font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 5px 14px 5px 8px; border-radius: var(--rmax); margin-bottom: 32px; }
+.badge-dot { width: 6px; height: 6px; background: var(--t1); border-radius: 50%; animation: blink 2s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+.hero-h1 { font-size: clamp(52px,8vw,100px); font-weight: 800; line-height: .94; letter-spacing: -.045em; color: var(--t1); margin-bottom: 28px; max-width: 820px; }
+.hero-pill { display: inline-block; background: var(--green); padding: 4px 18px 8px; border-radius: 12px; line-height: 1.05; }
+.hero-sub { font-size: 17px; color: var(--t3); max-width: 480px; line-height: 1.75; margin-bottom: 40px; }
+.hero-ctas { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 64px; }
+.stats { display: flex; border: 1.5px solid var(--b1); border-radius: var(--rxl); overflow: hidden; width: fit-content; background: var(--white); }
+.stat { padding: 20px 32px; border-right: 1.5px solid var(--b1); }
+.stat:last-child { border-right: none; }
+.stat-n { font-size: 30px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+.stat-l { font-size: 12px; color: var(--t3); margin-top: 3px; }
+
+.sec { max-width: 1160px; margin: 0 auto; padding: 80px 32px; }
+.sec-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--s2); border: 1px solid var(--b1); border-radius: var(--rmax); padding: 4px 12px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--t3); margin-bottom: 16px; }
+.sec-dot { width: 5px; height: 5px; background: var(--green3); border-radius: 50%; }
+.sec-h2 { font-size: clamp(30px,4vw,50px); font-weight: 800; letter-spacing: -.035em; line-height: 1.05; margin-bottom: 14px; }
+.sec-lead { font-size: 16px; color: var(--t3); max-width: 460px; line-height: 1.75; }
+
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 12px; margin-top: 48px; }
+.step-c { background: var(--white); border: 1.5px solid var(--b1); border-radius: var(--rxl); padding: 28px 24px; transition: border-color .18s, box-shadow .18s; }
+.step-c:hover { border-color: var(--green3); box-shadow: 0 4px 20px rgba(32,232,83,.1); }
+.step-n { width: 28px; height: 28px; border-radius: 50%; background: var(--green); font-size: 12px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+.step-name { font-size: 17px; font-weight: 800; letter-spacing: -.02em; margin-bottom: 8px; }
+.step-d { font-size: 14px; color: var(--t3); line-height: 1.65; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 40px; }
+.chip { background: var(--white); border: 1.5px solid var(--b1); border-radius: var(--rmax); padding: 9px 18px; font-size: 13px; font-weight: 600; color: var(--t2); transition: all .15s; cursor: default; }
+.chip:hover { background: var(--green); border-color: var(--green); color: var(--t1); }
+
+.faqs { display: flex; flex-direction: column; gap: 6px; margin-top: 48px; }
+.faq { background: var(--white); border: 1.5px solid var(--b1); border-radius: var(--rlg); overflow: hidden; }
+.faq.open { border-color: var(--b2); }
+.faq-btn { width: 100%; padding: 18px 22px; background: transparent; border: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-family: var(--f); font-size: 15px; font-weight: 700; color: var(--t1); cursor: pointer; text-align: left; }
+.faq-ico { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--s2); border: 1.5px solid var(--b1); display: flex; align-items: center; justify-content: center; font-size: 17px; transition: transform .22s, background .18s; }
+.faq.open .faq-ico { transform: rotate(45deg); background: var(--green); border-color: var(--green); }
+.faq-body { display: none; padding: 0 22px 18px; font-size: 14px; color: var(--t3); line-height: 1.75; }
+.faq.open .faq-body { display: block; }
+
+.cta-band { background: var(--t1); border-radius: var(--r2xl); margin: 0 32px 80px; padding: 72px 60px; text-align: center; position: relative; overflow: hidden; }
+.cta-band::after { content: ''; position: absolute; bottom: -100px; left: 50%; transform: translateX(-50%); width: 480px; height: 480px; background: radial-gradient(circle, rgba(59,255,108,.12) 0%, transparent 60%); pointer-events: none; }
+.cta-band h2 { font-size: clamp(32px,4.5vw,54px); font-weight: 800; letter-spacing: -.04em; color: #fff; line-height: 1.05; margin-bottom: 14px; }
+.cta-band p { font-size: 15px; color: #777; max-width: 400px; margin: 0 auto 32px; }
+
+footer { border-top: 1.5px solid var(--b1); padding: 28px 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; }
+.foot-logo { font-size: 18px; font-weight: 800; letter-spacing: -.05em; }
+.foot-dot { color: var(--green3); }
+.foot-links { display: flex; gap: 20px; }
+.foot-links a { font-size: 12px; color: var(--t4); text-decoration: none; transition: color .15s; }
+.foot-links a:hover { color: var(--t3); }
+.foot-copy { font-size: 12px; color: var(--t4); }
+
+/* ── ESTIMATEUR ── */
+.est-shell { min-height: 100vh; background: var(--bg); padding-top: 60px; }
+.est-body { max-width: 660px; margin: 0 auto; padding: 48px 24px 80px; }
+
+.crumbs { display: flex; align-items: center; margin-bottom: 36px; overflow-x: auto; padding-bottom: 2px; }
+.crumb { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: .04em; color: var(--t4); white-space: nowrap; flex-shrink: 0; }
+.crumb.active { color: var(--t1); }
+.crumb.done { color: var(--gink); }
+.crumb-n { width: 22px; height: 22px; border-radius: 50%; background: var(--s2); border: 1.5px solid var(--b1); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: var(--t4); transition: all .2s; flex-shrink: 0; }
+.crumb.active .crumb-n { background: var(--t1); border-color: var(--t1); color: #fff; }
+.crumb.done .crumb-n { background: var(--green); border-color: var(--green); color: var(--t1); }
+.crumb-sep { width: 20px; height: 1.5px; background: var(--b1); flex-shrink: 0; margin: 0 4px; }
+.crumb.done + .crumb-sep { background: var(--green); }
+
+.pbar { height: 2px; background: var(--b1); border-radius: 99px; margin-bottom: 40px; overflow: hidden; }
+.pfill { height: 100%; background: var(--t1); border-radius: 99px; transition: width .4s cubic-bezier(.4,0,.2,1); }
+
+.card { background: var(--white); border: 1.5px solid var(--b1); border-radius: var(--r2xl); padding: 44px 40px; box-shadow: var(--sh); }
+.card-tag { display: inline-flex; align-items: center; background: var(--green); color: var(--t1); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 4px 10px; border-radius: var(--rmax); margin-bottom: 14px; }
+.card-title { font-size: 26px; font-weight: 800; letter-spacing: -.03em; color: var(--t1); line-height: 1.15; margin-bottom: 6px; }
+.card-desc { font-size: 14px; color: var(--t3); margin-bottom: 36px; }
+
+.f { margin-bottom: 26px; }
+.f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.f label { display: block; font-size: 13px; font-weight: 700; color: var(--t1); margin-bottom: 8px; }
+.f label .opt { font-weight: 500; color: var(--t4); font-size: 12px; }
+.f label .hint { display: block; font-size: 12px; font-weight: 400; color: var(--t3); margin-top: 2px; line-height: 1.5; }
+
+input[type=text], input[type=email], input[type=number], input[type=tel], input[type=url], select, textarea {
+  width: 100%; background: var(--bg); border: 1.5px solid var(--b1); border-radius: var(--rmd); padding: 11px 14px;
+  font-family: var(--f); font-size: 14px; font-weight: 500; color: var(--t1); outline: none;
+  transition: border-color .15s, box-shadow .15s; -webkit-appearance: none; appearance: none;
+}
+input:focus, select:focus, textarea:focus { border-color: var(--t1); box-shadow: 0 0 0 3px rgba(10,10,10,.06); background: var(--white); }
+input::placeholder, textarea::placeholder { color: var(--t4); }
+select { background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%235C5C5C' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+input[type=range] { width: 100%; height: 4px; padding: 0; background: var(--b1); border: none; border-radius: 99px; cursor: pointer; accent-color: var(--t1); }
+.slider-val { font-size: 22px; font-weight: 800; letter-spacing: -.03em; color: var(--t1); margin-top: 10px; }
+
+.rg { display: grid; grid-template-columns: repeat(auto-fill, minmax(136px,1fr)); gap: 8px; }
+.rc { position: relative; cursor: pointer; }
+.rc input { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
+.rci { background: var(--bg); border: 1.5px solid var(--b1); border-radius: var(--rlg); padding: 16px 14px; font-size: 13px; font-weight: 600; color: var(--t3); transition: all .15s; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 7px; line-height: 1.3; }
+.rci .em { font-size: 22px; }
+.rc input:checked + .rci { background: var(--t1); border-color: var(--t1); color: #fff; }
+.rc:hover .rci { border-color: var(--b2); }
+
+.cbg { display: grid; grid-template-columns: repeat(auto-fill, minmax(158px,1fr)); gap: 8px; }
+.cb { position: relative; cursor: pointer; }
+.cb input { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
+.cbi { background: var(--bg); border: 1.5px solid var(--b1); border-radius: var(--rmd); padding: 12px 14px; font-size: 13px; font-weight: 600; color: var(--t3); transition: all .15s; display: flex; align-items: center; gap: 10px; }
+.cbm { width: 16px; height: 16px; border-radius: 5px; flex-shrink: 0; border: 1.5px solid var(--b2); background: var(--white); display: flex; align-items: center; justify-content: center; transition: all .15s; }
+.cb input:checked + .cbi { background: var(--white); border-color: var(--t1); color: var(--t1); }
+.cb input:checked + .cbi .cbm { background: var(--t1); border-color: var(--t1); }
+.cb input:checked + .cbi .cbm::after { content: '✓'; font-size: 10px; color: #fff; font-weight: 800; }
+
+.form-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 36px; padding-top: 28px; border-top: 1.5px solid var(--b1); }
+.btn-back { background: transparent; border: 1.5px solid var(--b1); color: var(--t3); font-family: var(--f); font-size: 13px; font-weight: 700; padding: 11px 22px; border-radius: var(--rmax); cursor: pointer; transition: all .15s; display: flex; align-items: center; gap: 6px; }
+.btn-back:hover { border-color: var(--b2); color: var(--t1); }
+.btn-next { background: var(--t1); color: #fff; font-family: var(--f); font-size: 13px; font-weight: 800; padding: 11px 26px; border-radius: var(--rmax); border: none; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all .15s; }
+.btn-next:hover { background: #1c1c1c; transform: translateY(-1px); }
+
+/* ── RÉSULTAT ── */
+.res-shell { background: var(--bg); min-height: 100vh; padding-top: 60px; }
+.res-body { max-width: 860px; margin: 0 auto; padding: 52px 24px 80px; }
+.res-ey { display: inline-flex; align-items: center; gap: 7px; background: var(--green); color: var(--t1); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 4px 12px 4px 8px; border-radius: var(--rmax); margin-bottom: 20px; }
+.res-ey-dot { width: 5px; height: 5px; background: var(--t1); border-radius: 50%; }
+.res-h1 { font-size: clamp(34px,5.5vw,60px); font-weight: 800; letter-spacing: -.04em; line-height: 1.04; margin-bottom: 36px; }
+
+.price-card { background: var(--t1); border-radius: var(--r2xl); padding: 52px 44px; margin-bottom: 16px; position: relative; overflow: hidden; }
+.price-card::before { content: ''; position: absolute; top: -80px; right: -80px; width: 340px; height: 340px; background: radial-gradient(circle, rgba(59,255,108,.12) 0%, transparent 65%); }
+.price-ey { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: #484848; font-weight: 700; margin-bottom: 12px; }
+.price-main { font-size: clamp(64px,12vw,108px); font-weight: 800; letter-spacing: -.05em; line-height: .92; color: var(--green); display: block; margin-bottom: 14px; }
+.price-range { font-size: 14px; color: #555; }
+.price-range strong { color: #888; font-weight: 700; }
+.price-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 24px; }
+.ptag { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.09); border-radius: var(--rmax); padding: 4px 12px; font-size: 11px; font-weight: 700; color: #777; }
+.ptag.g { background: rgba(59,255,108,.10); border-color: rgba(59,255,108,.20); color: var(--green); }
+
+.meta-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 16px; }
+.meta-c { background: var(--white); border: 1.5px solid var(--b1); border-radius: var(--rxl); padding: 22px 20px; transition: border-color .18s; }
+.meta-c:hover { border-color: var(--green3); }
+.meta-l { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--t4); margin-bottom: 8px; font-weight: 700; }
+.meta-v { font-size: 26px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+.meta-s { font-size: 11px; color: var(--t4); margin-top: 4px; }
+
+.struct-c { background: var(--white); border: 1.5px solid var(--b1); border-radius: var(--rxl); padding: 24px 22px; display: flex; gap: 16px; align-items: flex-start; margin-bottom: 16px; transition: border-color .18s; }
+.struct-c:hover { border-color: var(--green3); }
+.struct-ico { width: 40px; height: 40px; border-radius: var(--rmd); background: var(--green); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.struct-title { font-size: 15px; font-weight: 800; margin-bottom: 5px; }
+.struct-desc { font-size: 13px; color: var(--t3); line-height: 1.65; }
+
+.rsec { margin-bottom: 32px; }
+.rsec-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.rsec-bar { width: 3px; height: 18px; border-radius: 2px; background: var(--t1); flex-shrink: 0; }
+.rsec-title { font-size: 17px; font-weight: 800; letter-spacing: -.02em; }
+
+.factors { display: flex; flex-direction: column; gap: 7px; }
+.factor { background: var(--white); border: 1.5px solid var(--b1); border-radius: var(--rmd); padding: 13px 16px; font-size: 13px; color: var(--t2); line-height: 1.5; display: flex; gap: 10px; align-items: flex-start; }
+.factor.up { border-left: 3px solid #22C55E; }
+.factor.dn { border-left: 3px solid var(--b2); }
+.f-ico { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+.breakdown { background: var(--white); border: 1.5px solid var(--b1); border-radius: var(--rxl); overflow: hidden; }
+.bd { display: flex; justify-content: space-between; align-items: center; padding: 12px 22px; border-bottom: 1px solid var(--b1); font-size: 13px; }
+.bd:last-child { border-bottom: none; }
+.bd.tot { padding: 16px 22px; background: var(--s2); font-size: 16px; font-weight: 800; }
+.bd-l { color: var(--t3); }
+.bd-r { font-weight: 700; }
+.bdp { font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: var(--rmax); }
+.bdp.up { background: #DCFCE7; color: #15803D; }
+.bdp.dn { background: var(--s2); color: var(--t4); }
+
+.opts { display: flex; flex-direction: column; gap: 8px; }
+.opt { background: var(--white); border: 1.5px solid var(--b1); border-radius: var(--rlg); padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; gap: 16px; transition: border-color .18s; }
+.opt:hover { border-color: var(--green3); }
+.opt-name { font-size: 14px; font-weight: 800; margin-bottom: 2px; }
+.opt-desc { font-size: 12px; color: var(--t3); }
+.opt-price { font-size: 20px; font-weight: 800; letter-spacing: -.02em; color: var(--gink); white-space: nowrap; }
+
+.peda { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px,1fr)); gap: 10px; }
+.peda-c { background: var(--white); border: 1.5px solid var(--b1); border-radius: var(--rxl); padding: 24px 20px; transition: border-color .18s; }
+.peda-c:hover { border-color: var(--green3); }
+.peda-ico { font-size: 26px; margin-bottom: 12px; }
+.peda-title { font-size: 14px; font-weight: 800; margin-bottom: 7px; }
+.peda-txt { font-size: 13px; color: var(--t3); line-height: 1.65; }
+
+/* ── CAPTURE BLOCKS ── */
+.cap-block { background: var(--white); border: 1.5px solid var(--b1); border-radius: var(--r2xl); padding: 32px 36px; margin-bottom: 24px; display: flex; gap: 32px; align-items: center; position: relative; overflow: hidden; transition: border-color .2s; }
+.cap-block:hover { border-color: var(--green3); }
+.cap-block::before { content: ''; position: absolute; right: -40px; top: -40px; width: 180px; height: 180px; background: radial-gradient(circle, rgba(59,255,108,.12) 0%, transparent 65%); pointer-events: none; }
+.cap-left { flex: 1; min-width: 0; }
+.cap-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--green); display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 14px; }
+.cap-title { font-size: 18px; font-weight: 800; letter-spacing: -.025em; margin-bottom: 6px; }
+.cap-sub { font-size: 13px; color: var(--t3); line-height: 1.65; max-width: 340px; }
+.cap-perks { display: flex; flex-direction: column; gap: 5px; margin-top: 14px; }
+.cap-perk { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--t2); }
+.cap-perk::before { content: '✓'; font-size: 11px; font-weight: 800; width: 18px; height: 18px; border-radius: 50%; background: var(--green); color: var(--t1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.cap-right { flex-shrink: 0; min-width: 260px; }
+.cap-form { display: flex; flex-direction: column; gap: 10px; }
+.cap-input { background: var(--bg); border: 1.5px solid var(--b1); border-radius: var(--rmd); padding: 11px 14px; font-family: var(--f); font-size: 14px; font-weight: 500; color: var(--t1); outline: none; transition: border-color .15s; width: 100%; }
+.cap-input:focus { border-color: var(--t1); box-shadow: 0 0 0 3px rgba(10,10,10,.06); background: var(--white); }
+.cap-btn { background: var(--t1); color: #fff; font-family: var(--f); font-size: 13px; font-weight: 800; padding: 12px 20px; border-radius: var(--rmax); border: none; cursor: pointer; width: 100%; transition: background .15s; }
+.cap-btn:hover { background: #1c1c1c; }
+.cap-note { font-size: 11px; color: var(--t4); text-align: center; margin-top: 4px; }
+.cap-ok { display: none; text-align: center; padding: 20px; }
+.cap-ok-ico { font-size: 36px; margin-bottom: 10px; }
+.cap-ok-title { font-size: 16px; font-weight: 800; margin-bottom: 5px; }
+.cap-ok-sub { font-size: 13px; color: var(--t3); }
+
+.net-block { background: var(--t1); border-radius: var(--r2xl); padding: 48px 44px; margin-top: 48px; position: relative; overflow: hidden; }
+.net-block::before { content: ''; position: absolute; top: -60px; right: -60px; width: 280px; height: 280px; background: radial-gradient(circle, rgba(59,255,108,.15) 0%, transparent 65%); pointer-events: none; }
+.net-inner { display: flex; gap: 48px; align-items: flex-start; position: relative; z-index: 1; }
+.net-left { flex: 1; }
+.net-ey { display: inline-flex; align-items: center; gap: 6px; background: rgba(59,255,108,.12); border: 1px solid rgba(59,255,108,.2); border-radius: var(--rmax); padding: 4px 12px; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--green); margin-bottom: 16px; }
+.net-title { font-size: clamp(22px,3.5vw,32px); font-weight: 800; letter-spacing: -.035em; color: #fff; line-height: 1.1; margin-bottom: 12px; }
+.net-sub { font-size: 14px; color: #888; line-height: 1.7; max-width: 360px; margin-bottom: 20px; }
+.net-perks { display: flex; flex-direction: column; gap: 10px; }
+.net-perk { display: flex; align-items: flex-start; gap: 10px; }
+.net-perk-dot { width: 20px; height: 20px; border-radius: 50%; background: var(--green); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: var(--t1); margin-top: 1px; }
+.net-perk-txt { font-size: 13px; color: #aaa; line-height: 1.5; }
+.net-perk-txt strong { color: #ddd; font-weight: 700; }
+.net-right { flex-shrink: 0; min-width: 280px; }
+.net-form { display: flex; flex-direction: column; gap: 10px; }
+.net-input { background: rgba(255,255,255,.06); border: 1.5px solid rgba(255,255,255,.10); border-radius: var(--rmd); padding: 12px 14px; font-family: var(--f); font-size: 14px; font-weight: 500; color: #fff; outline: none; transition: border-color .15s; width: 100%; -webkit-appearance: none; appearance: none; }
+.net-input::placeholder { color: #555; }
+.net-input:focus { border-color: rgba(59,255,108,.4); background: rgba(255,255,255,.08); }
+.net-sel { background: rgba(255,255,255,.06); border: 1.5px solid rgba(255,255,255,.10); border-radius: var(--rmd); padding: 12px 14px; font-family: var(--f); font-size: 14px; font-weight: 500; color: #777; outline: none; width: 100%; -webkit-appearance: none; appearance: none; transition: border-color .15s; }
+.net-sel:focus { border-color: rgba(59,255,108,.4); color: #fff; }
+.net-sel option { background: #1a1a1a; color: #fff; }
+.net-consent { display: flex; align-items: flex-start; gap: 10px; }
+.net-consent input[type=checkbox] { width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; accent-color: var(--green); cursor: pointer; }
+.net-consent-txt { font-size: 12px; color: #666; line-height: 1.55; }
+.net-btn { background: var(--green); color: var(--t1); font-family: var(--f); font-size: 13px; font-weight: 800; padding: 13px 20px; border-radius: var(--rmax); border: none; cursor: pointer; width: 100%; transition: background .15s; }
+.net-btn:hover { background: var(--green2); }
+.net-note { font-size: 11px; color: #555; text-align: center; margin-top: 4px; }
+.net-ok { display: none; text-align: center; padding: 24px; }
+.net-ok-ico { font-size: 40px; margin-bottom: 12px; }
+.net-ok-title { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+.net-ok-sub { font-size: 13px; color: #888; line-height: 1.6; }
+
+.cta-box { background: var(--s2); border: 1.5px solid var(--b1); border-radius: var(--r2xl); padding: 52px 44px; text-align: center; margin-top: 16px; }
+.cta-box-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--green); color: var(--t1); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 4px 10px; border-radius: var(--rmax); margin-bottom: 14px; }
+.cta-box h2 { font-size: clamp(24px,3.5vw,38px); font-weight: 800; letter-spacing: -.04em; margin-bottom: 10px; line-height: 1.1; }
+.cta-box p { font-size: 14px; color: var(--t3); max-width: 380px; margin: 0 auto 24px; line-height: 1.7; }
+
+/* ── EXIT MODAL ── */
+.exit-ov { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(10,10,10,.6); backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 24px; }
+.exit-ov.on { display: flex; }
+.exit-modal { background: var(--white); border-radius: var(--r2xl); padding: 48px 44px; max-width: 480px; width: 100%; position: relative; box-shadow: var(--shm); animation: slideUp .3s ease; }
+@keyframes slideUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+.exit-close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border-radius: 50%; background: var(--s2); border: 1px solid var(--b1); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; color: var(--t3); transition: all .15s; }
+.exit-close:hover { background: var(--s3); color: var(--t1); }
+.exit-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--green); color: var(--t1); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 4px 10px; border-radius: var(--rmax); margin-bottom: 16px; }
+.exit-title { font-size: 24px; font-weight: 800; letter-spacing: -.03em; margin-bottom: 8px; line-height: 1.15; }
+.exit-sub { font-size: 14px; color: var(--t3); line-height: 1.65; margin-bottom: 24px; }
+.exit-hl { background: var(--bg); border: 1.5px solid var(--b1); border-radius: var(--rxl); padding: 18px 20px; margin-bottom: 24px; display: flex; gap: 14px; align-items: center; }
+.exit-price { font-size: 28px; font-weight: 800; letter-spacing: -.04em; line-height: 1; }
+.exit-plabel { font-size: 11px; color: var(--t4); margin-top: 2px; font-weight: 600; }
+.exit-sep { width: 1px; background: var(--b1); align-self: stretch; }
+.exit-pnote { font-size: 12px; color: var(--t3); line-height: 1.5; flex: 1; }
+.exit-form { display: flex; flex-direction: column; gap: 10px; }
+.exit-input { background: var(--bg); border: 1.5px solid var(--b1); border-radius: var(--rmd); padding: 12px 14px; font-family: var(--f); font-size: 14px; font-weight: 500; color: var(--t1); outline: none; transition: border-color .15s; width: 100%; }
+.exit-input:focus { border-color: var(--t1); background: var(--white); }
+.exit-btn { background: var(--t1); color: #fff; font-family: var(--f); font-size: 13px; font-weight: 800; padding: 13px; border-radius: var(--rmax); border: none; cursor: pointer; width: 100%; transition: background .15s; }
+.exit-btn:hover { background: #1c1c1c; }
+.exit-skip { text-align: center; margin-top: 10px; font-size: 12px; color: var(--t4); cursor: pointer; }
+.exit-skip:hover { color: var(--t3); }
+.exit-ok { display: none; text-align: center; padding: 20px 0; }
+.exit-ok-ico { font-size: 44px; margin-bottom: 12px; }
+.exit-ok-title { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+.exit-ok-sub { font-size: 14px; color: var(--t3); line-height: 1.65; }
+
+/* ── FLOAT BAR ── */
+.fbar { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px); z-index: 200; transition: transform .4s cubic-bezier(.34,1.56,.64,1); background: var(--t1); border-radius: var(--rmax); padding: 12px 20px 12px 16px; display: flex; align-items: center; gap: 14px; box-shadow: 0 8px 32px rgba(0,0,0,.18); width: fit-content; max-width: calc(100vw - 48px); }
+.fbar.show { transform: translateX(-50%) translateY(0); }
+.fbar-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: blink 2s ease-in-out infinite; }
+.fbar-txt { font-size: 13px; font-weight: 700; color: #fff; white-space: nowrap; }
+.fbar-inp { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: var(--rmax); padding: 8px 14px; font-family: var(--f); font-size: 13px; color: #fff; outline: none; width: 200px; }
+.fbar-inp::placeholder { color: #666; }
+.fbar-inp:focus { border-color: rgba(59,255,108,.4); }
+.fbar-btn { background: var(--green); color: var(--t1); font-family: var(--f); font-size: 12px; font-weight: 800; padding: 8px 16px; border-radius: var(--rmax); border: none; cursor: pointer; white-space: nowrap; }
+.fbar-btn:hover { background: var(--green2); }
+.fbar-x { width: 24px; height: 24px; border-radius: 50%; background: rgba(255,255,255,.08); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #666; font-size: 14px; flex-shrink: 0; transition: all .15s; }
+.fbar-x:hover { background: rgba(255,255,255,.15); color: #fff; }
+
+/* ── LOADER ── */
+.loader { display: none; position: fixed; inset: 0; z-index: 999; background: rgba(244,244,240,.94); backdrop-filter: blur(16px); align-items: center; justify-content: center; flex-direction: column; gap: 20px; }
+.loader.on { display: flex; }
+.loader-ring { width: 40px; height: 40px; border: 2.5px solid var(--b1); border-top-color: var(--t1); border-radius: 50%; animation: spin .75s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.loader-txt { font-size: 14px; font-weight: 600; color: var(--t3); }
+
+/* ── LEGAL ── */
+.legal-shell { background: var(--bg); padding-top: 60px; min-height: 100vh; }
+.legal-body { max-width: 700px; margin: 0 auto; padding: 52px 24px 80px; }
+.legal-title { font-size: clamp(32px,5vw,48px); font-weight: 800; letter-spacing: -.04em; margin-bottom: 32px; }
+.legal-p { font-size: 15px; color: var(--t3); line-height: 1.8; margin-bottom: 16px; }
+.legal-p strong { color: var(--t1); font-weight: 700; }
+
+/* ── ANIM ── */
+@keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+.a { animation: fadeUp .45s ease both; }
+.a1{animation-delay:.04s} .a2{animation-delay:.09s} .a3{animation-delay:.14s}
+.a4{animation-delay:.19s} .a5{animation-delay:.24s} .a6{animation-delay:.29s}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 720px) {
+  .nav { padding: 0 18px; }
+  .hero { padding: 100px 18px 60px; }
+  .sec { padding: 56px 18px; }
+  .cta-band { margin: 0 18px 60px; padding: 48px 24px; }
+  footer { padding: 22px 18px; }
+  .est-body, .res-body, .legal-body { padding-left: 14px; padding-right: 14px; }
+  .card { padding: 28px 20px; }
+  .f-row { grid-template-columns: 1fr; }
+  .meta-row { grid-template-columns: 1fr 1fr; }
+  .price-card { padding: 36px 24px; }
+  .cap-block { flex-direction: column; padding: 28px 24px; }
+  .cap-right { min-width: 0; width: 100%; }
+  .net-inner { flex-direction: column; gap: 28px; }
+  .net-right { min-width: 0; width: 100%; }
+  .cta-box { padding: 44px 24px; }
+  .stats { flex-direction: column; width: 100%; }
+  .stat { border-right: none; border-bottom: 1.5px solid var(--b1); }
+  .stat:last-child { border-bottom: none; }
+  .fbar { flex-direction: column; border-radius: var(--rxl); padding: 16px 18px; align-items: stretch; gap: 10px; }
+  .fbar-inp { width: 100%; }
+}
+@media (max-width: 460px) {
+  .meta-row { grid-template-columns: 1fr; }
+  .exit-modal { padding: 36px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="loader-ring"></div>
+  <div class="loader-txt">Calcul de ton estimation en cours…</div>
+</div>
+
+<!-- EXIT INTENT -->
+<div class="exit-ov" id="exitOv">
+  <div class="exit-modal">
+    <div class="exit-close" id="exitClose">&#x2715;</div>
+    <div class="exit-tag">&#x26A1; Avant de partir</div>
+    <h2 class="exit-title">Sauvegarde ton estimation gratuitement</h2>
+    <p class="exit-sub">Tu pars sans recuperer ton resultat ? On te l'envoie par email — pret a partager a un client ou retrouver plus tard.</p>
+    <div class="exit-hl">
+      <div>
+        <div class="exit-price" id="exitPrice">—</div>
+        <div class="exit-plabel">Ton prix estime</div>
+      </div>
+      <div class="exit-sep"></div>
+      <div class="exit-pnote">Fourchette + taux horaire + conseils pour defendre ton prix</div>
+    </div>
+    <div class="exit-form" id="exitForm">
+      <input type="email" class="exit-input" id="exitEmail" placeholder="ton@email.com">
+      <button class="exit-btn" id="exitSubmitBtn">Recevoir mon estimation &#x2192;</button>
+      <div class="exit-skip" id="exitSkip">Non merci, je quitte sans sauvegarder</div>
+    </div>
+    <div class="exit-ok" id="exitOk">
+      <div class="exit-ok-ico">&#x1F389;</div>
+      <div class="exit-ok-title">C'est dans ta boite !</div>
+      <div class="exit-ok-sub">Estimation envoyee. A bientot chez ERE AGENCY.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FLOAT BAR -->
+<div class="fbar" id="fbar">
+  <div class="fbar-dot"></div>
+  <div class="fbar-txt">&#x1F4E9; Recois ton estimation par email</div>
+  <input type="email" class="fbar-inp" id="fbarEmail" placeholder="ton@email.com">
+  <button class="fbar-btn" id="fbarBtn">Envoyer</button>
+  <button class="fbar-x" id="fbarClose">&#x2715;</button>
+</div>
+
+<!-- ════════════════════════════════════════
+     LANDING
+════════════════════════════════════════ -->
+<div id="pg-landing" class="pg on">
+
+  <nav class="nav">
+    <a class="nav-logo" href="#" id="logoLanding">ere<span class="nav-dot"></span></a>
+    <div class="nav-r">
+      <a class="nav-a" href="https://ere-agency.fr" target="_blank" rel="noopener">ere-agency.fr</a>
+      <button class="nbtn" id="navStartBtn">Estimer mon prix &#x2192;</button>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="badge"><div class="badge-dot"></div>Outil gratuit · 2026</div>
+    <h1 class="hero-h1">Ton prix freelance,<br><span style="display:inline-flex;align-items:center;gap:14px;flex-wrap:wrap;">calcule en <span class="hero-pill">2 min</span></span></h1>
+    <p class="hero-sub">Stop a l'improvisation tarifaire. Obtiens une fourchette personnalisee selon ton profil, ton service et ton marche — explications incluses.</p>
+    <div class="hero-ctas">
+      <button class="btn-k" id="heroStartBtn">Calcule mon prix gratuitement &#x2192;</button>
+      <a class="btn-o" href="https://ere-agency.fr" target="_blank" rel="noopener">Decouvrir ERE AGENCY</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-n">10+</div><div class="stat-l">Services couverts</div></div>
+      <div class="stat"><div class="stat-n">30+</div><div class="stat-l">Criteres analyses</div></div>
+      <div class="stat"><div class="stat-n">2 min</div><div class="stat-l">Chrono pour ton resultat</div></div>
+      <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Gratuit sans engagement</div></div>
+    </div>
+  </div>
+
+  <div class="sec" style="padding-top:0">
+    <div class="sec-tag"><div class="sec-dot"></div>Comment ca marche</div>
+    <h2 class="sec-h2">Simple, rapide, transparent.</h2>
+    <p class="sec-lead">Un algorithme parametre sur les realites du marche 2026. Pas de formule magique, juste de la methode.</p>
+    <div class="steps">
+      <div class="step-c"><div class="step-n">1</div><div class="step-name">Ton profil</div><p class="step-d">Niveau, experience, statut, zone geo. 2 minutes chrono.</p></div>
+      <div class="step-c"><div class="step-n">2</div><div class="step-name">Ton service</div><p class="step-d">Ads, SEO, site web, social media — questions specifiques selon ta prestation.</p></div>
+      <div class="step-c"><div class="step-n">3</div><div class="step-name">Ton marche</div><p class="step-d">Type de client, urgence, secteur, positionnement. Tout ce qui fait bouger les prix.</p></div>
+      <div class="step-c"><div class="step-n">4</div><div class="step-name">Ton estimation</div><p class="step-d">Fourchette min/max, taux horaire, detail du calcul et conseils pour negocier.</p></div>
+    </div>
+  </div>
+
+  <div class="sec" style="padding-top:0">
+    <div class="sec-tag"><div class="sec-dot"></div>Services couverts</div>
+    <h2 class="sec-h2">Pour quel service<br>tu veux te tarifer ?</h2>
+    <div class="chips">
+      <span class="chip">&#x1F4F1; Publicite Ads</span>
+      <span class="chip">&#x1F310; Site web</span>
+      <span class="chip">&#x1F50D; SEO</span>
+      <span class="chip">&#x1F4E3; Social Media</span>
+      <span class="chip">&#x1F3A8; Design / UI-UX</span>
+      <span class="chip">&#x1F4E7; Email / CRM</span>
+      <span class="chip">&#x270F;&#xFE0F; Copywriting</span>
+      <span class="chip">&#x2699;&#xFE0F; Automation</span>
+      <span class="chip">&#x1F4CA; Tracking / GA4</span>
+      <span class="chip">&#x2795; Autre</span>
+    </div>
+  </div>
+
+  <div class="sec" style="padding-top:0">
+    <div class="sec-tag"><div class="sec-dot"></div>Questions frequentes</div>
+    <h2 class="sec-h2">Tu te poses<br>des questions ?</h2>
+    <div class="faqs">
+      <div class="faq"><button class="faq-btn" data-faq>L'outil est-il vraiment gratuit ? <div class="faq-ico">+</div></button><div class="faq-body">Oui, 100%. ERE AGENCY l'offre aux freelances en marketing digital. Ton estimation t'appartient — aucune obligation de laisser ton email.</div></div>
+      <div class="faq"><button class="faq-btn" data-faq>Comment sont calcules les prix ? <div class="faq-ico">+</div></button><div class="faq-body">Taux horaire de base selon ton niveau et ta ville, puis multiplicateurs (urgence, complexite, taille client, secteur). Chaque facteur est explique dans ton resultat.</div></div>
+      <div class="faq"><button class="faq-btn" data-faq>Qu'est-ce que le reseau ERE Agency ? <div class="faq-ico">+</div></button><div class="faq-body">Un vivier de freelances qualifies en marketing digital qu'on sollicite pour les missions de nos clients. Rejoindre le reseau = etre contacte quand un projet correspond a ton profil.</div></div>
+      <div class="faq"><button class="faq-btn" data-faq>Forfait ou taux horaire ? <div class="faq-ico">+</div></button><div class="faq-body">Le forfait est presque toujours plus avantageux : tu es paye pour la valeur livree, pas le temps passe. L'outil te recommande la meilleure structure selon ton contexte.</div></div>
+    </div>
+  </div>
+
+  <div class="cta-band">
+    <h2>Arrete de sous-facturer.<br>Calcule ton vrai prix.</h2>
+    <p>2 minutes. Gratuit. Et si tu veux un avis d'expert, ERE AGENCY est la pour toi.</p>
+    <button class="btn-g" id="ctaStartBtn">Commencer l'estimation &#x2192;</button>
+  </div>
+
+  <footer>
+    <div class="foot-logo">ere<span class="foot-dot">.</span></div>
+    <div class="foot-links">
+      <a href="https://ere-agency.fr" target="_blank" rel="noopener">ere-agency.fr</a>
+      <a href="#" id="linkMentions">Mentions legales</a>
+      <a href="#" id="linkPrivacy">Confidentialite</a>
+    </div>
+    <p class="foot-copy">&#xa9; 2026 ERE AGENCY</p>
+  </footer>
+</div>
+
+<!-- ════════════════════════════════════════
+     ESTIMATEUR
+════════════════════════════════════════ -->
+<div id="pg-estimateur" class="pg">
+  <nav class="nav">
+    <a class="nav-logo" href="#" id="logoEst">ere<span class="nav-dot"></span></a>
+    <div class="nav-r">
+      <span id="stepCounter" style="font-size:13px;font-weight:700;color:var(--t3)"></span>
+      <button class="nbtn out" id="estBackBtn">&#x2190; Retour</button>
+    </div>
+  </nav>
+  <div class="est-shell">
+    <div class="est-body">
+      <div class="crumbs" id="crumbs"></div>
+      <div class="pbar"><div class="pfill" id="pfill"></div></div>
+      <div class="card" id="formCard"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     RÉSULTAT
+════════════════════════════════════════ -->
+<div id="pg-resultat" class="pg">
+  <nav class="nav">
+    <a class="nav-logo" href="#" id="logoRes">ere<span class="nav-dot"></span></a>
+    <div class="nav-r">
+      <button class="nbtn out" id="resNewBtn">&#x2190; Nouvelle estimation</button>
+      <button class="nbtn" id="resSiteBtn">ere-agency.fr &#x2197;</button>
+    </div>
+  </nav>
+  <div class="res-shell">
+    <div class="res-body">
+      <div class="a">
+        <div class="res-ey"><div class="res-ey-dot"></div>Estimation personnalisee · 100% gratuit</div>
+        <h1 class="res-h1" id="resH1">Voici ton prix recommande</h1>
+      </div>
+
+      <div class="price-card a a1">
+        <div class="price-ey">PRIX FORFAIT RECOMMANDE</div>
+        <span class="price-main" id="rPrice">—</span>
+        <div class="price-range" id="rRange">Fourchette : <strong>—</strong> — <strong>—</strong></div>
+        <div class="price-tags" id="rTags"></div>
+      </div>
+
+      <div class="meta-row a a2">
+        <div class="meta-c"><div class="meta-l">Taux horaire</div><div class="meta-v" id="rHourly">—</div><div class="meta-s" id="rHourlyRange">—</div></div>
+        <div class="meta-c"><div class="meta-l">Heures estimees</div><div class="meta-v" id="rHours">—</div><div class="meta-s">pour cette mission</div></div>
+        <div class="meta-c"><div class="meta-l">Structure conseillee</div><div class="meta-v" id="rStruct">—</div><div class="meta-s">recommandee</div></div>
+      </div>
+
+      <!-- TRIGGER 1 : Email inline -->
+      <div class="cap-block a a2" id="capBlock">
+        <div class="cap-left">
+          <div class="cap-icon">&#x1F4E9;</div>
+          <div class="cap-title">Recois cette estimation par email</div>
+          <div class="cap-sub">Garde ton resultat a portee de main — ideal pour le partager a un client ou comparer tes prochains projets.</div>
+          <div class="cap-perks">
+            <span class="cap-perk">Resultat complet + detail du calcul</span>
+            <span class="cap-perk">Conseils pour defendre ton prix au client</span>
+            <span class="cap-perk">Ressources exclusives pour freelances</span>
+          </div>
+        </div>
+        <div class="cap-right">
+          <div class="cap-form" id="capForm">
+            <input type="email" class="cap-input" id="capEmail" placeholder="ton@email.com">
+            <button class="cap-btn" id="capSubmitBtn">Recevoir mon estimation &#x2192;</button>
+            <div class="cap-note">Gratuit · Aucun spam · Resiliable a tout moment</div>
+          </div>
+          <div class="cap-ok" id="capOk">
+            <div class="cap-ok-ico">&#x2705;</div>
+            <div class="cap-ok-title">C'est envoye !</div>
+            <div class="cap-ok-sub">Verifie ta boite — ton estimation t'attend.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="struct-c a a2">
+        <div class="struct-ico" id="rStructIco">&#x1F4CB;</div>
+        <div><div class="struct-title" id="rStructTitle">—</div><div class="struct-desc" id="rStructDesc">—</div></div>
+      </div>
+
+      <div class="rsec a a3" id="secUp">
+        <div class="rsec-head"><div class="rsec-bar" style="background:var(--green3)"></div><div class="rsec-title">Ce qui tire ton prix vers le haut</div></div>
+        <div class="factors" id="rUp"></div>
+      </div>
+
+      <div class="rsec a a3" id="secDn">
+        <div class="rsec-head"><div class="rsec-bar" style="background:var(--b2)"></div><div class="rsec-title">Ce qui ajuste ton prix a la baisse</div></div>
+        <div class="factors" id="rDn"></div>
+      </div>
+
+      <div class="rsec a a4">
+        <div class="rsec-head"><div class="rsec-bar"></div><div class="rsec-title">Detail du calcul</div></div>
+        <div class="breakdown" id="rBreakdown"></div>
+      </div>
+
+      <div class="rsec a a4" id="secOpts">
+        <div class="rsec-head"><div class="rsec-bar" style="background:var(--b2)"></div><div class="rsec-title">Options a proposer au client</div></div>
+        <div class="opts" id="rOpts"></div>
+      </div>
+
+      <div class="rsec a a5">
+        <div class="rsec-head"><div class="rsec-bar"></div><div class="rsec-title">Comment defendre ton prix</div></div>
+        <div class="peda">
+          <div class="peda-c"><div class="peda-ico">&#x1F3AF;</div><div class="peda-title">Commence par la valeur</div><p class="peda-txt">Explique le resultat que tu vas creer avant d'annoncer le prix. Le client achete une transformation, pas des heures.</p></div>
+          <div class="peda-c"><div class="peda-ico">&#x23F8;&#xFE0F;</div><div class="peda-title">Annonce et tais-toi</div><p class="peda-txt">Apres avoir dit ton prix, fais une pause. Ne le justifie pas spontanement — le silence appartient a qui l'occupe.</p></div>
+          <div class="peda-c"><div class="peda-ico">&#x1F4E6;</div><div class="peda-title">Propose 3 options</div><p class="peda-txt">Basique / Standard / Premium. Le client choisit entre tes offres, pas entre toi et un concurrent.</p></div>
+          <div class="peda-c"><div class="peda-ico">&#x1F6A9;</div><div class="peda-title">Erreurs classiques</div><p class="peda-txt">Sous-facturer pour avoir la mission, accepter sans acompte, pas de deadline sur le devis — ces 3 erreurs coutent cher.</p></div>
+        </div>
+      </div>
+
+      <!-- TRIGGER 2 : Reseau -->
+      <div class="net-block a a5">
+        <div class="net-inner">
+          <div class="net-left">
+            <div class="net-ey">ERE AGENCY · Reseau freelances</div>
+            <h2 class="net-title">Tu cherches des missions<br>qui correspondent a ton profil ?</h2>
+            <p class="net-sub">ERE AGENCY travaille avec des freelances en marketing digital pour les missions de ses clients. Rejoindre notre reseau, c'est etre contacte en premier quand un projet te correspond.</p>
+            <div class="net-perks">
+              <div class="net-perk"><div class="net-perk-dot">&#x2713;</div><div class="net-perk-txt"><strong>Missions qualifiees</strong> — clients serieux avec des budgets adaptes</div></div>
+              <div class="net-perk"><div class="net-perk-dot">&#x2713;</div><div class="net-perk-txt"><strong>Aucune obligation</strong> — tu acceptes ou refuses chaque mission</div></div>
+              <div class="net-perk"><div class="net-perk-dot">&#x2713;</div><div class="net-perk-txt"><strong>Reseau actif</strong> — ERE place des freelances regulierement</div></div>
+            </div>
+          </div>
+          <div class="net-right">
+            <div class="net-form" id="netForm">
+              <input type="email" class="net-input" id="netEmail" placeholder="Ton email pro">
+              <input type="text" class="net-input" id="netName" placeholder="Ton prenom">
+              <select class="net-sel" id="netService">
+                <option value="" disabled selected>Ton service principal</option>
+                <option value="ads">Publicite Ads</option>
+                <option value="site_web">Site web</option>
+                <option value="seo">SEO</option>
+                <option value="social_media">Social Media</option>
+                <option value="design">Design / UI-UX</option>
+                <option value="email_crm">Email / CRM</option>
+                <option value="copywriting">Copywriting</option>
+                <option value="automation">Automation</option>
+                <option value="tracking">Tracking / GA4</option>
+                <option value="autre">Autre</option>
+              </select>
+              <div class="net-consent">
+                <input type="checkbox" id="netConsent">
+                <div class="net-consent-txt">J'accepte qu'ERE AGENCY me contacte pour des opportunites de mission. <a href="#" id="netPrivacyLink" style="color:var(--green)">Politique de confidentialite</a>.</div>
+              </div>
+              <button class="net-btn" id="netSubmitBtn">Rejoindre le reseau ERE &#x2192;</button>
+              <div class="net-note">Gratuit · Sans engagement · Tu peux te retirer a tout moment</div>
+            </div>
+            <div class="net-ok" id="netOk">
+              <div class="net-ok-ico">&#x1F91D;</div>
+              <div class="net-ok-title">Bienvenue dans le reseau !</div>
+              <div class="net-ok-sub">On reviendra vers toi des qu'une mission correspond a ton profil.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-box a a6" style="margin-top:16px">
+        <div class="cta-box-tag">Besoin d'un avis humain ?</div>
+        <h2>30 minutes avec Elias, gratuitement</h2>
+        <p>Fondateur d'ERE AGENCY, Elias peut analyser ton positionnement et te donner des axes concrets pour augmenter tes revenus freelance.</p>
+        <a class="btn-k" href="https://ere-agency.fr" target="_blank" rel="noopener">Reserver mon audit gratuit &#x2192;</a>
+      </div>
+
+      <div style="text-align:center;margin-top:40px">
+        <button class="btn-o" id="restartBtn">&#x2190; Refaire une estimation</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGES LEGALES -->
+<div id="pg-mentions" class="pg">
+  <nav class="nav"><a class="nav-logo" href="#" id="logoMentions">ere<span class="nav-dot"></span></a><div class="nav-r"><button class="nbtn out" id="mentionsBack">&#x2190; Retour</button></div></nav>
+  <div class="legal-shell"><div class="legal-body">
+    <h1 class="legal-title">Mentions legales</h1>
+    <p class="legal-p"><strong>Editeur :</strong> ERE AGENCY — Elias Rollier</p>
+    <p class="legal-p"><strong>Site :</strong> ere-agency.fr</p>
+    <p class="legal-p"><strong>Hebergement :</strong> Vercel Inc., 340 Pine Street Suite 701, San Francisco CA 94104, USA</p>
+    <p class="legal-p"><strong>Propriete intellectuelle :</strong> Tous les contenus sont la propriete exclusive d'ERE AGENCY.</p>
+  </div></div>
+</div>
+<div id="pg-privacy" class="pg">
+  <nav class="nav"><a class="nav-logo" href="#" id="logoPrivacy">ere<span class="nav-dot"></span></a><div class="nav-r"><button class="nbtn out" id="privacyBack">&#x2190; Retour</button></div></nav>
+  <div class="legal-shell"><div class="legal-body">
+    <h1 class="legal-title">Politique de confidentialite</h1>
+    <p class="legal-p"><strong>Donnees collectees :</strong> email, prenom, service choisi, reponses au formulaire.</p>
+    <p class="legal-p"><strong>Finalite :</strong> envoi du resultat, mise en relation pour missions freelance (avec consentement explicite).</p>
+    <p class="legal-p"><strong>Conservation :</strong> 3 ans. <strong>Base legale :</strong> consentement (RGPD 6.1.a).</p>
+    <p class="legal-p"><strong>Vos droits :</strong> contact via ere-agency.fr</p>
+  </div></div>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+/* ── PAGES ── */
+var PAGES = ['landing','estimateur','resultat','mentions','privacy'];
+
+function showPage(p) {
+  PAGES.forEach(function(id) {
+    var el = document.getElementById('pg-' + id);
+    if (el) el.className = 'pg' + (id === p ? ' on' : '');
+  });
+  window.scrollTo(0, 0);
+  if (p === 'estimateur') renderStep();
+  if (p === 'resultat') { initExit(); initFbar(); }
+}
+
+/* ── NAV BUTTONS ── */
+function bindNav() {
+  var ids = {
+    'logoLanding': 'landing', 'navStartBtn': 'estimateur', 'heroStartBtn': 'estimateur',
+    'ctaStartBtn': 'estimateur', 'logoEst': 'landing', 'estBackBtn': 'landing',
+    'logoRes': 'landing', 'resNewBtn': null, 'resSiteBtn': null,
+    'restartBtn': null, 'logoMentions': 'landing', 'mentionsBack': 'landing',
+    'logoPrivacy': 'landing', 'privacyBack': 'landing',
+    'linkMentions': 'mentions', 'linkPrivacy': 'privacy', 'netPrivacyLink': 'privacy'
+  };
+  Object.keys(ids).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    if (ids[id]) {
+      el.addEventListener('click', function(e) { e.preventDefault(); showPage(ids[id]); });
+    }
+  });
+  var resNew = document.getElementById('resNewBtn');
+  if (resNew) resNew.addEventListener('click', function() { doRestart(); });
+  var restart = document.getElementById('restartBtn');
+  if (restart) restart.addEventListener('click', function() { doRestart(); });
+  var resSite = document.getElementById('resSiteBtn');
+  if (resSite) resSite.addEventListener('click', function() { window.open('https://ere-agency.fr','_blank'); });
+
+  // FAQ
+  document.querySelectorAll('[data-faq]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      btn.closest('.faq').classList.toggle('open');
+    });
+  });
+}
+
+/* ── PRICING ENGINE ── */
+var P = {
+  base: { debutant:32, intermediaire:55, avance:90, expert:145 },
+  exp:  { '0':.85, '<1':.90, '1-2':1, '3-5':1.10, '5+':1.20 },
+  geo:  { paris:1.18, lyon:1.06, bordeaux:1.04, marseille:1.02, toulouse:1.03, nantes:1.04 },
+  urg:  { '<7j':1.25, '7-14j':1.10, '>14j':1 },
+  sz:   { solo:.88, tpe:.95, pme:1.05, eti:1.15, grand_compte:1.28 },
+  cmp:  { '1':.85, '2':.95, '3':1, '4':1.18, '5':1.35 },
+  rev:  { '1':1.05, '2':1.10, '3':1.15, illimite:1.22 },
+  str:  { execution_only:1, strategy_execution:1.28 },
+  pos:  { 'low-cost':.78, standard:1, premium:1.28 },
+  sec:  { ecommerce:1.05, saas:1.10, immobilier:1.08, sante:1.12, finance:1.15, b2b_services:1.05, startup:.95, association:.80 },
+  hrs:  { ads:25, site_web:30, seo:18, social_media:25, design:40, email_crm:25, copywriting:10, automation:20, tracking:15, autre:20 },
+  buf: 1.12, rMin:.82, rMax:1.22
+};
+function pct(a,b) { return b ? Math.round((1-b/a)*100) : Math.round((a-1)*100); }
+function fmt(n) { return Math.round(n).toLocaleString('fr-FR'); }
+
+function calcPrice(d) {
+  var fUp=[], fDn=[], mults=[];
+  var rate = P.base[d.level||'debutant'] || 32;
+  var eM = P.exp[d.experienceYears] || 1;
+  if (eM>1) fUp.push('Experience solide — tu peux facturer plus (+' + pct(eM) + '%)');
+  if (eM<1) fDn.push("Peu d'experience — c'est normal pour commencer (-" + pct(1,eM) + '%)');
+  rate *= eM;
+  var city = (d.geoCity||'').toLowerCase(), gM=1;
+  var geoKeys = Object.keys(P.geo);
+  for (var i=0;i<geoKeys.length;i++) { if (city.indexOf(geoKeys[i])>=0) { gM=P.geo[geoKeys[i]]; break; } }
+  if (gM>1) fUp.push((d.geoCity||'') + ' — zone geographique a forte valeur marchande');
+  rate *= gM;
+  if (d.clientTypeGeo==='international') { rate*=1.15; fUp.push('Clientele internationale (+15%)'); }
+  var hrs = (d.estimatedHours&&d.estimatedHours>0) ? +d.estimatedHours : (P.hrs[d.serviceCategory]||20);
+  var tot=1;
+  var uM = P.urg[d.urgency]||1;
+  if (uM>1) { fUp.push('Delai urgent (' + d.urgency + ') — prime de vitesse +' + pct(uM) + '%'); mults.push({l:'Urgence ('+d.urgency+')',v:uM,up:1}); }
+  tot*=uM;
+  var sM = P.sz[d.clientSize]||1;
+  if (sM>1) fUp.push('Client ' + d.clientSize + ' — process et interlocuteurs = plus de valeur percue');
+  if (sM<1) fDn.push('Client solo/TPE — budgets generalement plus contraints (-' + pct(1,sM) + '%)');
+  mults.push({l:'Taille client ('+d.clientSize+')',v:sM,up:sM>=1}); tot*=sM;
+  var cM = P.cmp[String(d.complexity||3)]||1;
+  if (cM>1) fUp.push('Complexite elevee (' + d.complexity + '/5) — risque et reflexion accrus');
+  if (cM<1) fDn.push('Projet simple (' + d.complexity + '/5) — moins de charge mentale');
+  mults.push({l:'Complexite '+d.complexity+'/5',v:cM,up:cM>=1}); tot*=cM;
+  var rM = P.rev[d.numRevisions]||1.10;
+  if (rM>1.05) { fUp.push(d.numRevisions + ' retours inclus — buffer allers-retours ajoute'); mults.push({l:'Retours ('+d.numRevisions+')',v:rM,up:1}); }
+  tot*=rM;
+  var stM = P.str[d.propositionType]||1;
+  if (stM>1) { fUp.push('Strategie incluse — tu apportes le cerveau, pas juste les mains (+' + pct(stM) + '%)'); mults.push({l:'Strategie incluse',v:stM,up:1}); }
+  tot*=stM;
+  var pM = P.pos[d.positioning]||1;
+  if (pM>1) { fUp.push('Positionnement premium — assume-le'); mults.push({l:'Premium',v:pM,up:1}); }
+  if (pM<1) { fDn.push('Positionnement low-cost — utile pour les premieres missions'); mults.push({l:'Low-cost',v:pM,up:0}); }
+  tot*=pM;
+  var seM = P.sec[d.clientSector]||1;
+  if (seM>1) { fUp.push('Secteur ' + d.clientSector + ' — forte valeur'); mults.push({l:'Secteur '+d.clientSector,v:seM,up:1}); }
+  if (seM<1) { fDn.push('Secteur ' + d.clientSector + ' — budgets plus contraints'); mults.push({l:'Secteur '+d.clientSector,v:seM,up:0}); }
+  tot*=seM;
+  if (d.beginnerPack==='true'||d.beginnerPack===true) { tot*=.85; fDn.push('Pack debutant applique (-15%)'); mults.push({l:'Pack debutant',v:.85,up:0}); }
+  if (!d.hasPortfolio||d.hasPortfolio==='false') { tot*=.92; fDn.push('Portfolio absent — confiance plus difficile a etablir (-8%)'); mults.push({l:'Pas de portfolio',v:.92,up:0}); }
+  var subtotal = Math.round(rate*hrs);
+  var rec = Math.round(subtotal*tot*P.buf);
+  var mn = Math.round(rec*P.rMin), mx = Math.round(rec*P.rMax);
+  var hly = Math.round(rec/hrs);
+  var struct='Forfait', sReas="Le forfait est la structure reine : tu es paye pour la valeur livree, pas le temps. Ca protege ta marge si tu travailles plus vite.", sIco='&#x1F4CB;';
+  if (d.collaborationMode==='retainer') { struct='Retainer'; sReas='Collaboration mensuelle recurrente = retainer. Tu securises ton revenu, le client securise ta dispo.'; sIco='&#x1F4C5;'; }
+  else if (hrs<10) { struct='Tarif horaire'; sReas='Mission courte et perimetre flou : le tarif horaire reste la solution la plus protectrice.'; sIco='&#x23F1;&#xFE0F;'; }
+  var opts=[];
+  if (d.serviceCategory==='ads') {
+    opts.push({l:'Dashboard reporting live',p:Math.round(hly*4),d:'Looker Studio actualise en temps reel'});
+    if (d.adsCreatives==='freelance') opts.push({l:'Pack creas (5 visuels + 2 videos)',p:Math.round(hly*8),d:'Production des assets'});
+  }
+  if (d.serviceCategory==='site_web'&&(d.siteMaintenance==='true'||d.siteMaintenance===true)) opts.push({l:'Maintenance mensuelle',p:Math.round(hly*3),d:'MAJ, securite, petites modifications (3h/mois)'});
+  if (d.serviceCategory==='seo') opts.push({l:'Rapport mensuel detaille',p:Math.round(hly*2),d:'Positions, trafic, leads generes'});
+  if (d.collaborationMode==='retainer') opts.push({l:'Engagement 3 mois (-10%)',p:-Math.round(rec*.10),d:'Fidelite recompensee'});
+  return { rec:rec, mn:mn, mx:mx, hly:hly, hlyMn:Math.round(mn/hrs), hlyMx:Math.round(mx/hrs), hrs:hrs, rate:Math.round(rate), subtotal:subtotal, mults:mults, fUp:fUp, fDn:fDn, opts:opts, struct:struct, sReas:sReas, sIco:sIco };
+}
+
+/* ── STATE ── */
+var fd = {}, step = 0, captured = false, exitShown = false, fbarShown = false, fbarTimer = null;
+var TOTAL = 6;
+var STEPS = [
+  {id:'A', label:'Profil',   title:'Parle-moi de toi',              desc:'Honnetete = meilleure estimation. 2 minutes chrono.'},
+  {id:'B', label:'Marche',   title:'Ton marche et contexte',         desc:'Qui sont tes clients ? Dans quelle zone tu travailles ?'},
+  {id:'C', label:'Service',  title:'Quel service tu proposes ?',     desc:"Choisis la categorie principale."},
+  {id:'D', label:'Details',  title:'Details du service',             desc:"Plus on en sait sur ta mission, plus l'estimation est precise."},
+  {id:'E', label:'Charge',   title:'Temps et complexite',            desc:"Evalue la charge de travail. Reste honnete, l'estimation est pour toi."},
+  {id:'F', label:'Valeur',   title:'Valeur et conditions',           desc:'Ce que tu inclus dans ta prestation influe sur le prix.'}
+];
+
+function save() { try { localStorage.setItem('ere_fd', JSON.stringify(fd)); } catch(e){} }
+function load() { try { var s=localStorage.getItem('ere_fd'); if(s) fd=JSON.parse(s); } catch(e){ fd={}; } }
+function doRestart() {
+  fd={}; step=0; captured=false; exitShown=false; fbarShown=false;
+  try { localStorage.removeItem('ere_fd'); } catch(e){}
+  hideFbar();
+  showPage('estimateur');
+}
+
+/* ── BUILD CRUMBS + PROGRESS ── */
+function renderBreadcrumb() {
+  var bc = document.getElementById('crumbs');
+  if (!bc) return;
+  var html = '';
+  STEPS.forEach(function(s,i) {
+    var cls = i<step ? 'crumb done' : i===step ? 'crumb active' : 'crumb';
+    var num = i<step ? '&#x2713;' : (i+1);
+    html += '<div class="' + cls + '"><div class="crumb-n">' + num + '</div><span>' + s.label + '</span></div>';
+    if (i < STEPS.length-1) html += '<div class="crumb-sep"></div>';
+  });
+  bc.innerHTML = html;
+  var pf = document.getElementById('pfill');
+  if (pf) pf.style.width = Math.round(((step+1)/TOTAL)*100) + '%';
+  var sc = document.getElementById('stepCounter');
+  if (sc) sc.textContent = (step+1) + ' / ' + TOTAL;
+}
+
+/* ── FIELD HELPERS ── */
+function setF(n,v) {
+  fd[n]=v; save();
+  if (n==='hasPortfolio') { var e=document.getElementById('fpField'); if(e) e.style.display=(v==='true'?'':'none'); }
+  if (n==='serviceCategory' && v==='autre') { var e2=document.getElementById('autreField'); if(e2) e2.style.display=''; }
+}
+function toggleCb(n,v,checked) {
+  if (!fd[n]) fd[n]=[];
+  if (checked) { if (fd[n].indexOf(v)<0) fd[n].push(v); }
+  else { fd[n]=fd[n].filter(function(x){return x!==v;}); }
+  save();
+}
+function onSlider(el,dispId) {
+  var map = { slHrs:function(v){return v+'h / semaine';}, slRisk:function(v){return 'Niveau '+v+' / 5';}, slCmp:function(v){return 'Complexite '+v+' / 5';}, slPosts:function(v){return v+' posts / semaine';} };
+  var d=document.getElementById(dispId); if(d) d.textContent=(map[dispId]||function(v){return v;})(el.value);
+  fd[el.name]=+el.value; save();
+}
+function saveTextFields() {
+  var inputs = document.querySelectorAll('#formCard input[type=text], #formCard input[type=email], #formCard input[type=number], #formCard input[type=url], #formCard input[type=tel], #formCard select, #formCard textarea');
+  inputs.forEach(function(el) {
+    if (!el.name) return;
+    if (el.value !== '') fd[el.name] = el.type==='number' ? +el.value : el.value;
+  });
+  save();
+}
+
+/* ── BUILD RADIO ── */
+function rc(n,v,em,lb) {
+  var chk = fd[n]===v ? ' checked' : '';
+  return '<label class="rc"><input type="radio" name="'+n+'" value="'+v+'"'+chk+' onchange="window._ere.setF(\''+n+'\',\''+v+'\')" tabindex="0"><div class="rci"><span class="em">'+em+'</span><span>'+lb+'</span></div></label>';
+}
+function cb(n,v,lb) {
+  var arr=fd[n]||[], chk=arr.indexOf(v)>=0?' checked':'';
+  return '<label class="cb"><input type="checkbox" name="'+n+'" value="'+v+'"'+chk+' onchange="window._ere.toggleCb(\''+n+'\',\''+v+'\',this.checked)"><div class="cbi"><div class="cbm"></div><span>'+lb+'</span></div></label>';
+}
+
+/* ── BUILD STEPS ── */
+function buildStep(i) {
+  if (i===0) return '<div class="f f-row"><div><label>Prenom <span class="opt">(optionnel)</span></label><input type="text" name="firstName" placeholder="Elias"></div><div><label>Nom <span class="opt">(optionnel)</span></label><input type="text" name="lastName" placeholder="Rollier"></div></div>'
+    +'<div class="f"><label>Statut actuel</label><div class="rg">'+rc('status','etudiant','&#x1F393;','Etudiant')+rc('status','alternant','&#x1F504;','Alternant')+rc('status','salarie','&#x1F4BC;','Salarie')+rc('status','freelance','&#x1F680;','Freelance')+rc('status','side','&#x1F319;','Side-project')+'</div></div>'
+    +'<div class="f"><label>Experience en marketing digital</label><div class="rg">'+rc('experienceYears','0','&#x1F331;','0 an')+rc('experienceYears','<1','&#x1F4D7;','< 1 an')+rc('experienceYears','1-2','&#x1F4D8;','1-2 ans')+rc('experienceYears','3-5','&#x1F4D9;','3-5 ans')+rc('experienceYears','5+','&#x2B50;','5 ans +')+'</div></div>'
+    +'<div class="f"><label>Ton niveau</label><div class="rg">'+rc('level','debutant','&#x1F423;','Debutant')+rc('level','intermediaire','&#x1F425;','Intermediaire')+rc('level','avance','&#x1F985;','Avance')+rc('level','expert','&#x1F981;','Expert')+'</div></div>'
+    +'<div class="f"><label>Tu as un portfolio ?</label><div class="rg" style="grid-template-columns:1fr 1fr">'+rc('hasPortfolio','true','&#x2705;','Oui')+rc('hasPortfolio','false','&#x274C;','Pas encore')+'</div></div>'
+    +'<div class="f" id="fpField" style="display:'+(fd.hasPortfolio==='true'?'':'none')+'"><label>Lien portfolio <span class="opt">(optionnel)</span></label><input type="url" name="portfolioUrl" placeholder="https://monportfolio.fr"></div>'
+    +'<div class="f"><label>Disponibilite</label><input type="range" name="hoursPerWeek" min="1" max="60" value="'+(fd.hoursPerWeek||20)+'" oninput="window._ere.onSlider(this,\'slHrs\')"><div class="slider-val" id="slHrs">'+(fd.hoursPerWeek||20)+'h / semaine</div></div>'
+    +'<div class="f"><label>Objectif principal</label><div class="rg">'+rc('objective','revenus','&#x1F4B0;','Max revenus')+rc('objective','references','&#x1F3C6;','Gagner des refs')+rc('objective','equilibre','&#x2696;&#xFE0F;','Equilibre')+'</div></div>';
+
+  if (i===1) return '<div class="f f-row"><div><label>Pays</label><select name="geoCountry"><option value="">— Choisir —</option><option value="france">France</option><option value="belgique">Belgique</option><option value="suisse">Suisse</option><option value="canada">Canada</option><option value="uk">Royaume-Uni</option><option value="usa">USA</option><option value="autre">Autre</option></select></div><div><label>Ville</label><input type="text" name="geoCity" placeholder="Paris, Lyon…"></div></div>'
+    +'<div class="f"><label>Type de clientele</label><div class="rg">'+rc('clientTypeGeo','local','&#x1F4CD;','Locale')+rc('clientTypeGeo','national','&#x1F5FA;&#xFE0F;','Nationale')+rc('clientTypeGeo','international','&#x1F30D;','Internationale')+'</div></div>'
+    +'<div class="f"><label>Secteur du client</label><select name="clientSector"><option value="">— Choisir —</option><option value="ecommerce">E-commerce</option><option value="saas">SaaS / Tech</option><option value="immobilier">Immobilier</option><option value="sante">Sante</option><option value="finance">Finance</option><option value="b2b_services">Services B2B</option><option value="startup">Startup</option><option value="association">Association</option><option value="restauration">Restauration</option><option value="mode">Mode / Luxe</option><option value="autre">Autre</option></select></div>'
+    +'<div class="f"><label>Taille du client</label><div class="rg">'+rc('clientSize','solo','&#x1F464;','Solo')+rc('clientSize','tpe','&#x1F3E0;','TPE < 10')+rc('clientSize','pme','&#x1F3E2;','PME 10-250')+rc('clientSize','eti','&#x1F3EC;','ETI 250+')+rc('clientSize','grand_compte','&#x1F3ED;','Grand compte')+'</div></div>'
+    +'<div class="f"><label>Urgence</label><div class="rg">'+rc('urgency','<7j','&#x1F525;','< 7 jours')+rc('urgency','7-14j','&#x26A1;','7-14 jours')+rc('urgency','>14j','&#x1F33F;','> 14 jours')+'</div></div>'
+    +'<div class="f"><label>Mode de collaboration</label><div class="rg">'+rc('collaborationMode','one-shot','1&#xFE0F;&#x20E3;','One-shot')+rc('collaborationMode','recurrent','&#x1F501;','Recurrent')+rc('collaborationMode','retainer','&#x1F4C5;','Retainer mensuel')+'</div></div>'
+    +'<div class="f"><label>Positionnement</label><div class="rg">'+rc('positioning','low-cost','&#x1F4B8;','Low-cost')+rc('positioning','standard','&#x1F3AF;','Standard')+rc('positioning','premium','&#x1F48E;','Premium')+'</div></div>'
+    +'<div class="f"><label>Complexite du client<span class="hint">Process longs, interlocuteurs multiples…</span></label><input type="range" name="riskLevel" min="1" max="5" value="'+(fd.riskLevel||2)+'" oninput="window._ere.onSlider(this,\'slRisk\')"><div class="slider-val" id="slRisk">Niveau '+(fd.riskLevel||2)+' / 5</div></div>';
+
+  if (i===2) {
+    var svcs=[{v:'ads',e:'&#x1F4F1;',l:'Publicite Ads',s:'Meta, Google, TikTok'},{v:'site_web',e:'&#x1F310;',l:'Site web',s:'Vitrine, landing, e-com'},{v:'seo',e:'&#x1F50D;',l:'SEO',s:'Audit, contenu, tech'},{v:'social_media',e:'&#x1F4E3;',l:'Social Media',s:'Contenu, community'},{v:'design',e:'&#x1F3A8;',l:'Design / UI-UX',s:'Branding, interfaces'},{v:'email_crm',e:'&#x1F4E7;',l:'Email / CRM',s:'Funnels, newsletters'},{v:'copywriting',e:'&#x270F;&#xFE0F;',l:'Copywriting',s:'Pages, emails, ads'},{v:'automation',e:'&#x2699;&#xFE0F;',l:'Automation',s:'No-code, workflows'},{v:'tracking',e:'&#x1F4CA;',l:'Tracking / GA4',s:'Analytics, GTM'},{v:'autre',e:'&#x2795;',l:'Autre',s:'Decrire ci-dessous'}];
+    var html='<div class="f"><label>Service principal</label><div class="rg" style="grid-template-columns:repeat(auto-fill,minmax(148px,1fr))">';
+    svcs.forEach(function(s){ html+='<label class="rc"><input type="radio" name="serviceCategory" value="'+s.v+'"'+(fd.serviceCategory===s.v?' checked':'')+' onchange="window._ere.setF(\'serviceCategory\',\''+s.v+'\')" tabindex="0"><div class="rci"><span class="em">'+s.e+'</span><strong style="font-size:12px">'+s.l+'</strong><span style="font-size:11px;color:var(--t4)">'+s.s+'</span></div></label>'; });
+    html+='</div></div><div class="f" id="autreField" style="display:'+(fd.serviceCategory==='autre'?'':'none')+'"><label>Decris ton service</label><input type="text" name="autreService" placeholder="Ex: formation, conseil…"></div>';
+    return html;
+  }
+
+  if (i===3) {
+    var svc=fd.serviceCategory||'ads';
+    if (svc==='ads') return '<div class="f"><label>Plateformes</label><div class="cbg">'+cb('adsPlatforms','meta','Meta (FB/IG)')+cb('adsPlatforms','google','Google Ads')+cb('adsPlatforms','tiktok','TikTok Ads')+cb('adsPlatforms','linkedin','LinkedIn')+cb('adsPlatforms','youtube','YouTube')+'</div></div>'
+      +'<div class="f"><label>Objectif</label><div class="rg">'+rc('adsObjective','leads','&#x1F3AF;','Leads')+rc('adsObjective','ventes','&#x1F4B0;','Ventes')+rc('adsObjective','trafic','&#x1F6A6;','Trafic')+rc('adsObjective','notoriete','&#x1F4E2;','Notoriete')+'</div></div>'
+      +'<div class="f"><label>Budget media / mois</label><div class="rg">'+rc('adsBudget','<500','&#x1F331;','< 500&#x20AC;')+rc('adsBudget','500-2k','&#x1F4C8;','500-2k&#x20AC;')+rc('adsBudget','2k-5k','&#x1F4AA;','2k-5k&#x20AC;')+rc('adsBudget','5k+','&#x1F680;','5k&#x20AC; +')+'</div></div>'
+      +'<div class="f"><label>Setup technique</label><div class="cbg">'+cb('adsSetupItems','pixel','Pixel / Tag')+cb('adsSetupItems','events','Events perso')+cb('adsSetupItems','capi','Conv. API')+cb('adsSetupItems','catalog','Catalogue')+'</div></div>'
+      +'<div class="f"><label>Creas</label><div class="rg">'+rc('adsCreatives','client','&#x1F4C1;','Client fournit')+rc('adsCreatives','freelance','&#x1F3A8;','Je les cree')+rc('adsCreatives','mix','&#x1F91D;','Mix')+'</div></div>'
+      +'<div class="f"><label>Reporting</label><div class="rg">'+rc('adsReporting','basique','&#x1F4DD;','Mensuel')+rc('adsReporting','hebdo','&#x1F4C5;','Hebdo')+rc('adsReporting','dashboard','&#x1F4CA;','Dashboard live')+'</div></div>';
+    if (svc==='site_web') return '<div class="f"><label>Type</label><div class="rg">'+rc('siteType','landing','&#x1F3AF;','Landing')+rc('siteType','vitrine_small','&#x1F3E0;','Vitrine 1-5p')+rc('siteType','vitrine_large','&#x1F3E2;','Vitrine 6-12p')+rc('siteType','ecommerce','&#x1F6D2;','E-commerce')+'</div></div>'
+      +'<div class="f"><label>Technologie</label><div class="rg">'+rc('siteTech','webflow','&#x1F30A;','Webflow')+rc('siteTech','wordpress','&#x1F4F0;','WordPress')+rc('siteTech','shopify','&#x1F7E2;','Shopify')+rc('siteTech','nextjs','&#x2B1B;','Next.js')+rc('siteTech','autre','&#x1F527;','Autre')+'</div></div>'
+      +'<div class="f"><label>Niveau design</label><div class="rg">'+rc('siteDesign','template','&#x1F4CB;','Template')+rc('siteDesign','semi_custom','&#x1F58C;&#xFE0F;','Semi-custom')+rc('siteDesign','sur_mesure','&#x2728;','Sur-mesure')+'</div></div>'
+      +'<div class="f"><label>Contenu</label><div class="rg">'+rc('siteContent','fourni','&#x1F4E6;','Fourni client')+rc('siteContent','a_rediger','&#x270F;&#xFE0F;','A rediger')+rc('siteContent','mix','&#x1F91D;','Mix')+'</div></div>'
+      +'<div class="f"><label>Maintenance incluse ?</label><div class="rg" style="grid-template-columns:1fr 1fr">'+rc('siteMaintenance','true','&#x2705;','Oui')+rc('siteMaintenance','false','&#x274C;','Non')+'</div></div>';
+    if (svc==='seo') return '<div class="f"><label>Type SEO</label><div class="cbg">'+cb('seoType','audit','Audit')+cb('seoType','roadmap','Roadmap')+cb('seoType','contenu','Contenu')+cb('seoType','technique','Technique')+cb('seoType','netlinking','Netlinking')+'</div></div>'
+      +'<div class="f"><label>Niveau concurrentiel</label><div class="rg">'+rc('seoCompetitiveLevel','faible','&#x1F331;','Faible')+rc('seoCompetitiveLevel','moyen','&#x26A1;','Moyen')+rc('seoCompetitiveLevel','fort','&#x1F525;','Fort')+'</div></div>'
+      +'<div class="f"><label>Articles / mois</label><input type="number" name="seoArticlesPerMonth" placeholder="Ex: 4" min="0" max="100"></div>';
+    if (svc==='social_media') return '<div class="f"><label>Plateformes</label><div class="cbg">'+cb('socialPlatforms','instagram','Instagram')+cb('socialPlatforms','facebook','Facebook')+cb('socialPlatforms','tiktok','TikTok')+cb('socialPlatforms','linkedin','LinkedIn')+cb('socialPlatforms','x','X / Twitter')+cb('socialPlatforms','youtube','YouTube')+'</div></div>'
+      +'<div class="f"><label>Posts / semaine</label><input type="range" name="socialPostsPerWeek" min="1" max="14" value="'+(fd.socialPostsPerWeek||5)+'" oninput="window._ere.onSlider(this,\'slPosts\')"><div class="slider-val" id="slPosts">'+(fd.socialPostsPerWeek||5)+' posts / semaine</div></div>'
+      +'<div class="f"><label>Reels / mois</label><input type="number" name="socialReelsPerMonth" placeholder="Ex: 4" min="0" max="60"></div>'
+      +'<div class="f"><label>Gestion DM ?</label><div class="rg" style="grid-template-columns:1fr 1fr">'+rc('socialDmModeration','true','&#x2705;','Oui')+rc('socialDmModeration','false','&#x274C;','Non')+'</div></div>';
+    return '<div class="f"><label>Decris ta prestation</label><textarea name="serviceDescriptionDetail" rows="4" placeholder="Ex: audit + refonte identite visuelle, livraison 3 semaines…"></textarea></div><div class="f"><label>Nombre de livrables</label><input type="number" name="numDeliverables" placeholder="Ex: 3" min="1" max="100"></div>';
+  }
+
+  if (i===4) return '<div class="f"><label>Temps estime (heures)<span class="hint">0 = calcul automatique selon ton service</span></label><input type="number" name="estimatedHours" placeholder="0 = auto" min="0" max="2000"></div>'
+    +'<div class="f"><label>Complexite</label><input type="range" name="complexity" min="1" max="5" value="'+(fd.complexity||3)+'" oninput="window._ere.onSlider(this,\'slCmp\')"><div class="slider-val" id="slCmp">Complexite '+(fd.complexity||3)+' / 5</div></div>'
+    +'<div class="f"><label>Allers-retours inclus</label><div class="rg">'+rc('numRevisions','1','1&#xFE0F;&#x20E3;','1')+rc('numRevisions','2','2&#xFE0F;&#x20E3;','2')+rc('numRevisions','3','3&#xFE0F;&#x20E3;','3')+rc('numRevisions','illimite','&#x267E;&#xFE0F;','Illimites')+'</div></div>'
+    +'<div class="f"><label>Reunions incluses</label><div class="rg">'+rc('numMeetings','0','&#x1F6AB;','Aucune')+rc('numMeetings','1','1&#xFE0F;&#x20E3;','1')+rc('numMeetings','hebdo','&#x1F4C5;','Hebdomadaires')+'</div></div>';
+
+  if (i===5) return '<div class="f"><label>Ce que tu proposes<span class="hint">Strategie incluse = tu peux facturer davantage</span></label><div class="rg" style="grid-template-columns:1fr 1fr">'+rc('propositionType','execution_only','&#x2699;&#xFE0F;','Execution')+rc('propositionType','strategy_execution','&#x1F9E0;','Strategie + Exec.')+'</div></div>'
+    +'<div class="f"><label>Cession de droits</label><div class="rg">'+rc('rightsCession','none','&#x1F6AB;','Aucune')+rc('rightsCession','standard','&#x1F4CB;','Usage limite')+rc('rightsCession','full','&#x1F4DC;','Cession totale')+'</div></div>'
+    +'<div class="f"><label>Conditions de paiement</label><div class="rg">'+rc('paymentTerms','100','&#x1F4AF;','100% livraison')+rc('paymentTerms','50-50','&#x270C;&#xFE0F;','50% / 50%')+rc('paymentTerms','30-40-30','&#x1F4CA;','30/40/30')+'</div></div>'
+    +'<div class="f"><label>Pack debutant ?<span class="hint">-15% pour decrocher tes premieres references</span></label><div class="rg" style="grid-template-columns:1fr 1fr">'+rc('beginnerPack','true','&#x1F331;','Oui, -15%')+rc('beginnerPack','false','&#x1F4AA;','Tarif plein')+'</div></div>';
+
+  return '';
+}
+
+/* ── RENDER STEP ── */
+function renderStep() {
+  renderBreadcrumb();
+  var s = STEPS[step];
+  var isLast = step === TOTAL-1;
+  var html = '<div class="card-tag">Etape ' + s.id + '</div>'
+    + '<div class="card-title">' + s.title + '</div>'
+    + '<div class="card-desc">' + s.desc + '</div>'
+    + '<div id="stepFields">' + buildStep(step) + '</div>'
+    + '<div class="form-nav">'
+    + (step>0 ? '<button class="btn-back" id="backBtn">&#x2190; Retour</button>' : '<div></div>')
+    + '<button class="btn-next" id="nextBtn">' + (isLast ? 'Voir mon estimation &#x2192;' : 'Continuer &#x2192;') + '</button>'
+    + '</div>';
+  var card = document.getElementById('formCard');
+  if (card) card.innerHTML = html;
+
+  // Rebind dynamic buttons
+  var nextBtn = document.getElementById('nextBtn');
+  if (nextBtn) nextBtn.addEventListener('click', function() { doNext(); });
+  var backBtn = document.getElementById('backBtn');
+  if (backBtn) backBtn.addEventListener('click', function() { doPrev(); });
+
+  // Restore text field values
+  var fields = document.querySelectorAll('#stepFields input[type=text], #stepFields input[type=email], #stepFields input[type=number], #stepFields input[type=url], #stepFields select, #stepFields textarea');
+  fields.forEach(function(el) {
+    if (!el.name) return;
+    if (fd[el.name] !== undefined) el.value = fd[el.name];
+    if (el.type==='range') {
+      var map = { hoursPerWeek:'slHrs', riskLevel:'slRisk', complexity:'slCmp', socialPostsPerWeek:'slPosts' };
+      if (map[el.name]) { var d=document.getElementById(map[el.name]); if(d) { var fn=map[el.name]; window._ere.onSlider(el,fn); } }
+    }
+  });
+}
+
+function doNext() {
+  saveTextFields();
+  if (step === TOTAL-1) { doSubmit(); return; }
+  step++;
+  renderStep();
+  window.scrollTo(0,0);
+}
+function doPrev() {
+  if (step>0) { step--; renderStep(); window.scrollTo(0,0); }
+}
+
+/* ── SUBMIT ── */
+function doSubmit() {
+  saveTextFields();
+  var loader = document.getElementById('loader');
+  if (loader) loader.classList.add('on');
+  setTimeout(function() {
+    var r = calcPrice(fd);
+    if (loader) loader.classList.remove('on');
+    renderResult(r);
+    // Pre-fill capture fields
+    if (fd.email) {
+      var ci=document.getElementById('capEmail'); if(ci) ci.value=fd.email;
+      var ei=document.getElementById('exitEmail'); if(ei) ei.value=fd.email;
+      var fi=document.getElementById('fbarEmail'); if(fi) fi.value=fd.email;
+    }
+    if (fd.serviceCategory) { var ns=document.getElementById('netService'); if(ns) ns.value=fd.serviceCategory; }
+    if (fd.firstName) { var nn=document.getElementById('netName'); if(nn) nn.value=fd.firstName; }
+    showPage('resultat');
+  }, 1200);
+}
+
+/* ── RENDER RESULT ── */
+function renderResult(r) {
+  var name = fd.firstName ? ', ' + fd.firstName : '';
+  var h1 = document.getElementById('resH1');
+  if (h1) h1.textContent = 'Voici ton prix recommande' + name + ' \uD83D\uDC47';
+  var rp=document.getElementById('rPrice'); if(rp) rp.textContent = fmt(r.rec) + ' \u20AC';
+  var rr=document.getElementById('rRange'); if(rr) rr.innerHTML = 'Fourchette : <strong>' + fmt(r.mn) + ' \u20AC</strong> \u2014 <strong>' + fmt(r.mx) + ' \u20AC</strong>';
+  var tags = [fd.serviceCategory, fd.level, fd.geoCity||'France', fd.positioning].filter(Boolean);
+  var rt=document.getElementById('rTags'); if(rt) rt.innerHTML = tags.map(function(t){return '<span class="ptag">'+t+'</span>';}).join('') + '<span class="ptag g">'+r.struct+'</span>';
+  var rh=document.getElementById('rHourly'); if(rh) rh.textContent = r.hly + ' \u20AC/h';
+  var rhr=document.getElementById('rHourlyRange'); if(rhr) rhr.textContent = r.hlyMn + ' \u2014 ' + r.hlyMx + ' \u20AC/h';
+  var rhrs=document.getElementById('rHours'); if(rhrs) rhrs.textContent = r.hrs + 'h';
+  var rs=document.getElementById('rStruct'); if(rs) rs.textContent = r.struct;
+  var rsi=document.getElementById('rStructIco'); if(rsi) rsi.innerHTML = r.sIco;
+  var rst=document.getElementById('rStructTitle'); if(rst) rst.textContent = r.struct + ' recommande';
+  var rsd=document.getElementById('rStructDesc'); if(rsd) rsd.textContent = r.sReas;
+
+  var upEl=document.getElementById('rUp'), secUp=document.getElementById('secUp');
+  if (r.fUp.length && upEl) { upEl.innerHTML = r.fUp.map(function(f){return '<div class="factor up"><span class="f-ico">\u2197</span>'+f+'</div>';}).join(''); }
+  else if (secUp) secUp.style.display='none';
+
+  var dnEl=document.getElementById('rDn'), secDn=document.getElementById('secDn');
+  if (r.fDn.length && dnEl) { dnEl.innerHTML = r.fDn.map(function(f){return '<div class="factor dn"><span class="f-ico">\u2198</span>'+f+'</div>';}).join(''); }
+  else if (secDn) secDn.style.display='none';
+
+  var rows = [
+    {l:'Taux horaire de base', v:r.rate+' \u20AC/h'},
+    {l:'Heures estimees', v:r.hrs+'h'},
+    {l:'Sous-total', v:fmt(r.subtotal)+' \u20AC'}
+  ];
+  r.mults.forEach(function(m){ rows.push({l:m.l,v:'\xd7 '+m.v.toFixed(2),pill:true,up:m.up}); });
+  rows.push({l:'Buffer imprevus (+12%)',v:'\xd7 1.12',pill:true,up:1});
+  rows.push({l:'TOTAL RECOMMANDE',v:fmt(r.rec)+' \u20AC',tot:true});
+  var bd=document.getElementById('rBreakdown');
+  if(bd) bd.innerHTML = rows.map(function(row){return '<div class="bd'+(row.tot?' tot':'')+'"><span class="bd-l">'+row.l+'</span><span class="bd-r">'+(row.pill?'<span class="bdp '+(row.up?'up':'dn')+'">'+row.v+'</span>':row.v)+'</span></div>';}).join('');
+
+  var optsEl=document.getElementById('rOpts'), secOpts=document.getElementById('secOpts');
+  if (r.opts && r.opts.length && optsEl) {
+    optsEl.innerHTML = r.opts.map(function(o){return '<div class="opt"><div><div class="opt-name">'+o.l+'</div><div class="opt-desc">'+o.d+'</div></div><div class="opt-price">'+(o.p>0?'+':'')+fmt(o.p)+' \u20AC</div></div>';}).join('');
+  } else if (secOpts) secOpts.style.display='none';
+
+  var ep=document.getElementById('exitPrice'); if(ep) ep.textContent = fmt(r.rec) + ' \u20AC';
+}
+
+/* ── CAPTURE TRIGGERS ── */
+function captureContact(data) {
+  var payload = {
+    email: data.email || '',
+    firstName: data.firstName || fd.firstName || '',
+    service: data.service || fd.serviceCategory || '',
+    source: data.source || '',
+    level: fd.level || '',
+    city: fd.geoCity || '',
+    country: fd.geoCountry || '',
+    timestamp: new Date().toISOString()
+  };
+  console.log('Contact capture:', payload);
+  // Decommenter et remplacer l'URL :
+  // fetch('https://hook.eu1.make.com/VOTRE_WEBHOOK', {
+  //   method: 'POST',
+  //   headers: {'Content-Type':'application/json'},
+  //   body: JSON.stringify(payload)
+  // }).catch(function(e){ console.warn(e); });
+}
+
+// Trigger 1 — email inline
+document.getElementById('capSubmitBtn').addEventListener('click', function() {
+  var el = document.getElementById('capEmail');
+  var email = el ? el.value.trim() : '';
+  if (!email || email.indexOf('@')<0) { if(el) el.style.borderColor='#D93025'; return; }
+  captured = true;
+  captureContact({email:email, source:'inline_result'});
+  document.getElementById('capForm').style.display = 'none';
+  document.getElementById('capOk').style.display = 'block';
+  var fi=document.getElementById('fbarEmail'); if(fi) fi.value=email;
+  var ei=document.getElementById('exitEmail'); if(ei) ei.value=email;
+  hideFbar();
+});
+
+// Trigger 2 — reseau
+document.getElementById('netSubmitBtn').addEventListener('click', function() {
+  var emailEl = document.getElementById('netEmail');
+  var email = emailEl ? emailEl.value.trim() : '';
+  var consent = document.getElementById('netConsent');
+  if (!email || email.indexOf('@')<0) { if(emailEl) emailEl.style.borderColor='rgba(255,80,80,.5)'; return; }
+  if (!consent || !consent.checked) { if(consent) consent.style.outline='2px solid rgba(255,80,80,.5)'; return; }
+  var nameEl=document.getElementById('netName'), svcEl=document.getElementById('netService');
+  captured = true;
+  captureContact({email:email, firstName:nameEl?nameEl.value:'', service:svcEl?svcEl.value:'', source:'network_join'});
+  document.getElementById('netForm').style.display = 'none';
+  document.getElementById('netOk').style.display = 'block';
+  hideFbar(); closeExit();
+});
+
+// Trigger 3 — exit intent
+function initExit() {
+  if (exitShown || captured) return;
+  document.addEventListener('mouseleave', handleMouseLeave);
+}
+function handleMouseLeave(e) {
+  if (exitShown || captured) return;
+  if (e.clientY <= 10) {
+    exitShown = true;
+    var ov = document.getElementById('exitOv');
+    if (ov) ov.classList.add('on');
+  }
+}
+function closeExit() {
+  var ov = document.getElementById('exitOv');
+  if (ov) ov.classList.remove('on');
+  document.removeEventListener('mouseleave', handleMouseLeave);
+}
+document.getElementById('exitClose').addEventListener('click', closeExit);
+document.getElementById('exitSkip').addEventListener('click', closeExit);
+document.getElementById('exitOv').addEventListener('click', function(e) { if(e.target===this) closeExit(); });
+document.getElementById('exitSubmitBtn').addEventListener('click', function() {
+  var el=document.getElementById('exitEmail');
+  var email = el ? el.value.trim() : '';
+  if (!email || email.indexOf('@')<0) { if(el) el.style.borderColor='#D93025'; return; }
+  captured = true;
+  captureContact({email:email, source:'exit_intent'});
+  document.getElementById('exitForm').style.display='none';
+  document.getElementById('exitOk').style.display='block';
+  setTimeout(closeExit, 2800);
+});
+
+// Float bar
+function initFbar() {
+  if (fbarShown || captured) return;
+  fbarTimer = setTimeout(function() {
+    if (!captured) {
+      fbarShown = true;
+      var fb=document.getElementById('fbar'); if(fb) fb.classList.add('show');
+    }
+  }, 30000);
+}
+function hideFbar() {
+  var fb=document.getElementById('fbar'); if(fb) fb.classList.remove('show');
+  if (fbarTimer) { clearTimeout(fbarTimer); fbarTimer=null; }
+}
+document.getElementById('fbarClose').addEventListener('click', hideFbar);
+document.getElementById('fbarBtn').addEventListener('click', function() {
+  var el=document.getElementById('fbarEmail');
+  var email = el ? el.value.trim() : '';
+  if (!email || email.indexOf('@')<0) return;
+  captured = true;
+  captureContact({email:email, source:'float_bar'});
+  var fb=document.getElementById('fbar');
+  if(fb) fb.innerHTML='<span style="font-size:13px;font-weight:700;color:#fff;padding:4px 8px">&#x2705; Envoye a '+email+'</span>';
+  setTimeout(hideFbar, 3000);
+});
+
+/* ── EXPOSE API for inline handlers ── */
+window._ere = {
+  setF: setF,
+  toggleCb: toggleCb,
+  onSlider: onSlider
+};
+
+/* ── INIT ── */
+load();
+bindNav();
+
+})();
+</script>
+</body>
+</html>
